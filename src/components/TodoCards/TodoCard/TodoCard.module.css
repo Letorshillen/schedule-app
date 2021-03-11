@@ -1,0 +1,29 @@
+.TimeTextContainer {
+  display: flex;
+  align-items: center;
+  margin-top: 40px;
+}
+.HeadContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ToDo {
+  position: fixed;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 300;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 90vw;
+  height: 90vh;
+  padding: 20px;
+  border-radius: 20px;
+  background-color: white;
+}
+
+.ToDo p {
+  margin-left: 10px;
+}
