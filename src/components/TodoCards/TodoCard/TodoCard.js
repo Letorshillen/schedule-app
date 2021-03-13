@@ -4,9 +4,15 @@ import PropTypes from "prop-types";
 
 const TodoCard = (props) => {
   return (
-    <div className={styles.ToDo}>
+    <div
+      className={styles.ToDo}
+      style={{
+        transform: props.show ? "translate(-50%, -50%)" : "translateY(-200vh)",
+        opacity: props.show ? "1" : "0",
+      }}
+    >
       <div className={styles.HeadContainer}>
-        <div onClick={props.back} className={styles.Arrow}>
+        <div onClick={props.close} className={styles.Arrow}>
           <svg
             width="29"
             height="24"

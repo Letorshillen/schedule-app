@@ -1,0 +1,18 @@
+.DeleteModal {
+  position: fixed;
+  width: 80%;
+  background-color: white;
+  z-index: 100;
+  text-align: center;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.DeleteModalInner {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 10px;
+}

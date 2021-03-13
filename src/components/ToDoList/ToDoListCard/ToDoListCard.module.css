@@ -1,0 +1,27 @@
+.ToDoListCard {
+  width: 80%;
+  background-color: white;
+  border-radius: 10px;
+  margin: 20px auto;
+  padding: 8px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.deleteCross,
+.deleteCross::before {
+  cursor: pointer;
+  width: 18px;
+  height: 2px;
+  background-color: red;
+  border-radius: 1px;
+  transform: rotate(45deg);
+}
+
+.deleteCross::before {
+  position: absolute;
+  content: "";
+  background-color: red;
+  transform: rotate(-90deg);
+}
