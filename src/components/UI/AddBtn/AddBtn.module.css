@@ -1,0 +1,12 @@
+.AddBtn {
+  position: fixed;
+  transform: translateX(-50%);
+  left: 50%;
+  bottom: 10px;
+  background-color: lightgrey;
+  border: 0;
+  width: 200px;
+  height: 40px;
+  border-radius: 25px;
+  font-family: inherit;
+}

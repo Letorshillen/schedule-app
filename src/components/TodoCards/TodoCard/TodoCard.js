@@ -12,7 +12,7 @@ const TodoCard = (props) => {
       }}
     >
       <div className={styles.HeadContainer}>
-        <div onClick={props.close} className={styles.Arrow}>
+        <div onClick={props.close}>
           <svg
             width="29"
             height="24"

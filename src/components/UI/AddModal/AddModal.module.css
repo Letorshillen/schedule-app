@@ -1,0 +1,24 @@
+.AddModal {
+  position: fixed;
+  width: 90%;
+  height: 90vh;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+  background-color: white;
+  z-index: 100;
+  border-radius: 20px;
+  padding: 15px;
+  font-family: inherit;
+}
+
+.Wrapper {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Wrapper p {
+  font-weight: bold;
+}

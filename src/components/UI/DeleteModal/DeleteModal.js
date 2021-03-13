@@ -4,7 +4,9 @@ import styles from "./DeleteModal.module.css";
 const DeleteModal = (props) => {
   return (
     <div className={styles.DeleteModal}>
-      <p>YOu wanna delete for real</p>
+      <p>
+        <strong>You wanna delete for real?</strong>
+      </p>
       <div className={styles.DeleteModalInner}>
         <p onClick={props.delete} style={{ color: "red" }}>
           Löschen

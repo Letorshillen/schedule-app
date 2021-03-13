@@ -15,8 +15,8 @@ const ToDoList = (props) => {
         <ToDoListCard
           date={todo.date}
           key={todo.date}
-          openCard={() => props.openCard(index)}
           showDeleteModal={() => props.showDeleteModal(index)}
+          openCard={() => props.openCard(index)}
         />
       </React.Fragment>
     );
