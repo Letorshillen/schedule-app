@@ -185,7 +185,14 @@ export default class Layout extends Component {
     });
   };
 
+  addNewItemtoList = (newTodo) => {
+    this.setState({
+      todos: [...this.state.todos, newTodo],
+    });
+  };
+
   render() {
+    console.log(this.state.todos);
     let lastToDoItem = this.state.todos[this.state.todos.length - 1];
 
     let todos = null;
@@ -216,6 +223,8 @@ export default class Layout extends Component {
           activity3={lastToDoItem.activity3}
         />
         <AddModal
+          addItem={this.addNewItemtoList.bind(this)}
+          handleSubmit={this.addnewItemtoList}
           closeAddModal={this.closeAddModalHandler}
           showAddModal={this.state.showAddModal}
         />

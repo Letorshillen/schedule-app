@@ -1,9 +1,19 @@
-import React from "react";
 import styles from "./AddModal.module.css";
 
+import React from "react";
+import { useForm } from "react-hook-form";
+
 const AddModal = (props) => {
+  const { register, handleSubmit } = useForm();
+
+  const onSubmit = (data) => {
+    const newTodo = data;
+    props.addItem.addNewItemtoList("wad");
+    console.log(newTodo);
+  };
+
   return props.showAddModal ? (
-    <form className={styles.AddModal}>
+    <form onSubmit={handleSubmit(onSubmit)} className={styles.AddModal}>
       <div onClick={props.closeAddModal} className={styles.Arrow}>
         <svg
           width="29"
@@ -20,17 +30,17 @@ const AddModal = (props) => {
       </div>
       <div className={styles.Wrapper}>
         <h2>Datum:</h2>
-        <input type="text" value={props.date} />
+        <input type="text" name="date" ref={register} />
       </div>
 
       <div className={styles.Wrapper}>
         <p>09 Uhr</p>
-        <input type="text" value={props.activity1} />
+        <input type="text" name="activity1" ref={register} />
       </div>
 
       <div className={styles.Wrapper}>
         <p>11 Uhr</p>
-        <input type="text" value={props.activity2} />
+        <input type="text" />
       </div>
 
       <input type="submit" value="Submit"></input>
