@@ -6,7 +6,7 @@ const ToDoListCard = (props) => {
     <div className={styles.ToDoListCard}>
       <div onClick={props.openCard} className={styles.TextWrapper}>
         <h1>{props.date}</h1>
-        <p>ist vorbei</p>
+        <p>...</p>
       </div>
       <div onClick={props.showDeleteModal} className={styles.deleteCross}></div>
     </div>

@@ -17,8 +17,43 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 13px 10px;
 }
 
-.Wrapper p {
+.Wrapper label {
   font-weight: bold;
+  font-size: 25px;
+}
+
+.Wrapper input[type="text"],
+.Wrapper input[type="number"] {
+  border: 1px solid lightgray;
+  width: 65%;
+  height: 4vh;
+  font-family: inherit;
+  font-size: 20px;
+}
+
+button[type="submit"] {
+  position: relative;
+  border: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 55px;
+  height: 55px;
+  background-color: #26a249;
+  border-radius: 55px;
+}
+
+.SubmitBtnIcon {
+  color: white;
+  font-size: 30px;
+}
+
+.Header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  padding: 0 10px;
 }

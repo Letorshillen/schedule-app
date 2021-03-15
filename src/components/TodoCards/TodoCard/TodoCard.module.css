@@ -1,12 +1,20 @@
 .TimeTextContainer {
   display: flex;
   align-items: center;
-  margin-top: 40px;
+  padding: 15px 10px;
 }
+
+.TimeTextContainer:nth-child(odd) {
+  background-color: #26a2492f;
+  border-radius: 15px;
+}
+
 .HeadContainer {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 15px;
+  padding: 15px;
 }
 
 .ToDo {
@@ -22,11 +30,11 @@
   transform: translate(-50%, -50%);
   width: 90%;
   height: 90%;
-  padding: 20px;
+  padding: 15px;
   border-radius: 20px;
   background-color: white;
 }
 
 .ToDo p {
-  margin-left: 10px;
+  margin-left: 25px;
 }
