@@ -1,19 +1,34 @@
 import styles from "./AddModal.module.css";
 import { useState } from "react";
 
-const AddModal = (props, { onAdd }) => {
-  const [date, setDate] = useState();
+const AddModal = (props) => {
+  const [date, setDate] = useState("");
   const [activity1, setActivity1] = useState("");
+  const [activity2, setActivity2] = useState("");
+  const [activity3, setActivity3] = useState("");
+  const [activity4, setActivity4] = useState("");
+  const [activity5, setActivity5] = useState("");
+  const [activity6, setActivity6] = useState("");
+  const [activity7, setActivity7] = useState("");
 
   const onSubmit = (e) => {
     e.preventDefault();
 
-    // if (!date) {
-    //   alert("Add Date");
-    //   return;
-    // }
+    if (!date) {
+      alert("Add Date");
+      return;
+    }
 
-    onAdd({ date, activity1 });
+    props.onAdd({
+      date,
+      activity1,
+      activity2,
+      activity3,
+      activity4,
+      activity5,
+      activity6,
+      activity7,
+    });
   };
 
   return props.showAddModal ? (
@@ -54,7 +69,62 @@ const AddModal = (props, { onAdd }) => {
 
       <div className={styles.Wrapper}>
         <p>11 Uhr</p>
-        <input type="text" />
+        <input
+          type="text"
+          name="activity2"
+          value={activity2}
+          onChange={(e) => setActivity2(e.target.value)}
+        />
+      </div>
+
+      <div className={styles.Wrapper}>
+        <p>13 Uhr</p>
+        <input
+          type="text"
+          name="activity3"
+          value={activity3}
+          onChange={(e) => setActivity3(e.target.value)}
+        />
+      </div>
+
+      <div className={styles.Wrapper}>
+        <p>15 Uhr</p>
+        <input
+          type="text"
+          name="activity4"
+          value={activity4}
+          onChange={(e) => setActivity4(e.target.value)}
+        />
+      </div>
+
+      <div className={styles.Wrapper}>
+        <p>17 Uhr</p>
+        <input
+          type="text"
+          name="activity5"
+          value={activity5}
+          onChange={(e) => setActivity5(e.target.value)}
+        />
+      </div>
+
+      <div className={styles.Wrapper}>
+        <p>19 Uhr</p>
+        <input
+          type="text"
+          name="activity6"
+          value={activity6}
+          onChange={(e) => setActivity6(e.target.value)}
+        />
+      </div>
+
+      <div className={styles.Wrapper}>
+        <p>21 Uhr</p>
+        <input
+          type="text"
+          name="activity7"
+          value={activity7}
+          onChange={(e) => setActivity7(e.target.value)}
+        />
       </div>
 
       <input type="submit" value="Submit"></input>

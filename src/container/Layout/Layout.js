@@ -110,9 +110,15 @@ const Layout = () => {
 
   const addNewItemToList = (newTodo) => {
     console.log(newTodo);
-    // this.setState({
-    //   todos: [...this.state.todos, newTodo],
-    // });
+
+    for (let i = 1; i < todos.length; i++) {
+      if (newTodo.date === todos[i].date) {
+        alert("stop");
+        return;
+      }
+    }
+    setTodos([...todos, newTodo]);
+    closeAddModalHandler();
   };
 
   console.log(todos);
