@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./TodoCard.module.css";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 
 const TodoCard = (props) => {
   return (
@@ -60,15 +60,15 @@ const TodoCard = (props) => {
   );
 };
 
-TodoCard.propTypes = {
-  date: PropTypes.number,
-  activity1: PropTypes.string,
-  activity2: PropTypes.string,
-  activity3: PropTypes.string,
-  activity4: PropTypes.string,
-  activity5: PropTypes.string,
-  activity6: PropTypes.string,
-  activity7: PropTypes.string,
-};
+// TodoCard.propTypes = {
+//   date: PropTypes.number,
+//   activity1: PropTypes.string,
+//   activity2: PropTypes.string,
+//   activity3: PropTypes.string,
+//   activity4: PropTypes.string,
+//   activity5: PropTypes.string,
+//   activity6: PropTypes.string,
+//   activity7: PropTypes.string,
+// };
 
 export default TodoCard;

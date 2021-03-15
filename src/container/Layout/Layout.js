@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import { useState } from "react";
+import React from "react";
 import TodoCards from "../../components/TodoCards/TodoCards";
 import ToDoList from "../../components/ToDoList/ToDoList";
 import ToDoListBigCard from "../../components/ToDoList/ToDoListBigCard/ToDoListBigCard";
@@ -8,228 +9,148 @@ import Backdrop from "../../components/UI/Backdrop/Backdrop";
 
 import styles from "./Layout.module.css";
 
-export default class Layout extends Component {
-  state = {
-    todos: [
-      {
-        date: 9.03,
-        activity1: "loremteasjudwaudbfuawbloremtea",
-        activity2: "lorem",
-        activity3: "lorem",
-        activity4: "lorem",
-        activity5: "lorem",
-        activity6: "lorem",
-        activity7: "lorem",
-        showToDo: false,
-        showDeleteModal: false,
-      },
-      {
-        date: 11.03,
-        activity1: "loremteasjudwaudbfuawbloremtea",
-        activity2: "lorem",
-        activity3: "lorem",
-        activity4: "lorem",
-        activity5: "lorem",
-        activity6: "lorem",
-        activity7: "lorem",
-        showToDo: false,
-        showDeleteModal: false,
-      },
-      {
-        date: 12.03,
-        activity1: "loremteasjudwaudbfuawbloremtea",
-        activity2: "lorem",
-        activity3: "lorem",
-        activity4: "lorem",
-        activity5: "lorem",
-        activity6: "lorem",
-        activity7: "lorem",
-        showToDo: false,
-        showDeleteModal: false,
-      },
-      {
-        date: 15.03,
-        activity1: "loremteasjudwaudbfuawbloremtea",
-        activity2: "lorem",
-        activity3: "lorem",
-        activity4: "lorem",
-        activity5: "lorem",
-        activity6: "lorem",
-        activity7: "lorem",
-        showToDo: false,
-        showDeleteModal: false,
-      },
-      {
-        date: 13.03,
-        activity1: "loremteasjudwaudbfuawbloremtea",
-        activity2: "lorem",
-        activity3: "lorem",
-        activity4: "lorem",
-        activity5: "lorem",
-        activity6: "lorem",
-        activity7: "lorem",
-        showToDo: false,
-        showDeleteModal: false,
-      },
-      {
-        date: 14.03,
-        activity1: "loremteasjudwaudbfuawbloremtea",
-        activity2: "lorem",
-        activity3: "lorem",
-        activity4: "lorem",
-        activity5: "lorem",
-        activity6: "lorem",
-        activity7: "lorem",
-        showToDo: false,
-        showDeleteModal: false,
-      },
-    ],
-    showBackdrop: false,
-    showAddModal: false,
-  };
+const Layout = () => {
+  const [todos, setTodos] = useState([
+    {
+      date: 9.03,
+      activity1: "loremteasjudwaudbfuawbloremtea",
+      activity2: "lorem",
+      activity3: "lorem",
+      activity4: "lorem",
+      activity5: "lorem",
+      activity6: "lorem",
+      activity7: "lorem",
+      showToDo: false,
+      showDeleteModal: false,
+    },
+    {
+      date: 11.03,
+      activity1: "loremteasjudwaudbfuawbloremtea",
+      activity2: "lorem",
+      activity3: "lorem",
+      activity4: "lorem",
+      activity5: "lorem",
+      activity6: "lorem",
+      activity7: "lorem",
+      showToDo: false,
+      showDeleteModal: false,
+    },
+  ]);
+  const [showBackdrop, setBackdrop] = useState(false);
+  const [showAddModal, setAddModal] = useState(false);
 
-  closeToDoCardHandler = (todoIndex) => {
+  const closeToDoCardHandler = (todoIndex) => {
     const todo = {
-      ...this.state.todos[todoIndex],
+      ...todos[todoIndex],
     };
 
     todo.showToDo = false;
 
-    const todos = [...this.state.todos];
-    todos[todoIndex] = todo;
-    this.setState(() => {
-      return {
-        todos: todos,
-        showBackdrop: false,
-      };
-    });
+    const todosNew = [...todos];
+    todosNew[todoIndex] = todo;
+    setTodos(todosNew);
+    setBackdrop(false);
   };
 
-  openToDoCardHandler = (todoIndex) => {
+  const openToDoCardHandler = (todoIndex) => {
     const todo = {
-      ...this.state.todos[todoIndex],
+      ...todos[todoIndex],
     };
 
     todo.showToDo = true;
 
-    const todos = [...this.state.todos];
-    todos[todoIndex] = todo;
-    this.setState(() => {
-      return {
-        todos: todos,
-        showBackdrop: true,
-      };
-    });
+    const todosNew = [...todos];
+    todosNew[todoIndex] = todo;
+    setTodos(todosNew);
+    setBackdrop(true);
   };
 
-  showDeleteModalHandler = (todoIndex) => {
+  const showDeleteModalHandler = (todoIndex) => {
     const todo = {
-      ...this.state.todos[todoIndex],
+      ...todos[todoIndex],
     };
 
     todo.showDeleteModal = true;
 
-    const todos = [...this.state.todos];
-    todos[todoIndex] = todo;
-    this.setState(() => {
-      return {
-        todos: todos,
-        showBackdrop: true,
-      };
-    });
+    const todosNew = [...todos];
+    todosNew[todoIndex] = todo;
+    setTodos(todosNew);
+    setBackdrop(true);
   };
 
-  closeDeleteModalHandler = (todoIndex) => {
+  const closeDeleteModalHandler = (todoIndex) => {
     const todo = {
-      ...this.state.todos[todoIndex],
+      ...todos[todoIndex],
     };
 
     todo.showDeleteModal = false;
 
-    const todos = [...this.state.todos];
-    todos[todoIndex] = todo;
-    this.setState(() => {
-      return {
-        todos: todos,
-        showBackdrop: false,
-      };
-    });
+    const todosNew = [...todos];
+    todosNew[todoIndex] = todo;
+    setTodos(todosNew);
+    setBackdrop(false);
   };
 
-  deleteListCardHandler = (todoIndex) => {
-    const todos = [...this.state.todos];
-    todos.splice(todoIndex, 1);
-    this.setState(() => {
-      return {
-        todos: todos,
-        showBackdrop: false,
-      };
-    });
+  const deleteListCardHandler = (todoIndex) => {
+    const todosNew = [...todos];
+    todosNew.splice(todoIndex, 1);
+    setTodos(todosNew);
+    setBackdrop(false);
   };
 
-  openAddModalHandler = () => {
-    this.setState(() => {
-      return {
-        showAddModal: true,
-        showBackdrop: true,
-      };
-    });
+  const openAddModalHandler = () => {
+    setBackdrop(true);
+    setAddModal(true);
   };
 
-  closeAddModalHandler = () => {
-    this.setState(() => {
-      return {
-        showAddModal: false,
-        showBackdrop: false,
-      };
-    });
+  const closeAddModalHandler = () => {
+    setBackdrop(false);
+    setAddModal(false);
   };
 
-  addNewItemtoList = (newTodo) => {
-    this.setState({
-      todos: [...this.state.todos, newTodo],
-    });
+  const addNewItemToList = (newTodo) => {
+    console.log(newTodo);
+    // this.setState({
+    //   todos: [...this.state.todos, newTodo],
+    // });
   };
 
-  render() {
-    console.log(this.state.todos);
-    let lastToDoItem = this.state.todos[this.state.todos.length - 1];
+  console.log(todos);
+  let lastToDoItem = todos[todos.length - 1];
 
-    let todos = null;
-    todos = (
-      <TodoCards todos={this.state.todos} close={this.closeToDoCardHandler} />
-    );
+  let todosBig = null;
+  todosBig = <TodoCards todos={todos} close={closeToDoCardHandler} />;
 
-    let todolist = null;
-    todolist = (
-      <ToDoList
-        todos={this.state.todos}
-        openCard={this.openToDoCardHandler}
-        delete={this.deleteListCardHandler}
-        showDeleteModal={this.showDeleteModalHandler}
-        closeDeleteModal={this.closeDeleteModalHandler}
+  let todolist = null;
+  todolist = (
+    <ToDoList
+      todos={todos}
+      openCard={openToDoCardHandler}
+      delete={deleteListCardHandler}
+      showDeleteModal={showDeleteModalHandler}
+      closeDeleteModal={closeDeleteModalHandler}
+    />
+  );
+
+  return (
+    <React.Fragment>
+      <div className={styles.ListWrapper}>{todolist}</div>
+      {todosBig}
+      <Backdrop showBackdrop={showBackdrop} />
+      <ToDoListBigCard
+        date={lastToDoItem.date}
+        activity1={lastToDoItem.activity1}
+        activity2={lastToDoItem.activity2}
+        activity3={lastToDoItem.activity3}
       />
-    );
+      <AddModal
+        onAdd={addNewItemToList}
+        closeAddModal={closeAddModalHandler}
+        showAddModal={showAddModal}
+      />
+      <AddBtn openAddModal={openAddModalHandler} />
+    </React.Fragment>
+  );
+};
 
-    return (
-      <React.Fragment>
-        <div className={styles.ListWrapper}>{todolist}</div>
-        {todos}
-        <Backdrop showBackdrop={this.state.showBackdrop} />
-        <ToDoListBigCard
-          date={lastToDoItem.date}
-          activity1={lastToDoItem.activity1}
-          activity2={lastToDoItem.activity2}
-          activity3={lastToDoItem.activity3}
-        />
-        <AddModal
-          addItem={this.addNewItemtoList.bind(this)}
-          handleSubmit={this.addnewItemtoList}
-          closeAddModal={this.closeAddModalHandler}
-          showAddModal={this.state.showAddModal}
-        />
-        <AddBtn openAddModal={this.openAddModalHandler} />
-      </React.Fragment>
-    );
-  }
-}
+export default Layout;

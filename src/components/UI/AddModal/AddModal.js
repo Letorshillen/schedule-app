@@ -1,19 +1,23 @@
 import styles from "./AddModal.module.css";
+import { useState } from "react";
 
-import React from "react";
-import { useForm } from "react-hook-form";
+const AddModal = (props, { onAdd }) => {
+  const [date, setDate] = useState();
+  const [activity1, setActivity1] = useState("");
 
-const AddModal = (props) => {
-  const { register, handleSubmit } = useForm();
+  const onSubmit = (e) => {
+    e.preventDefault();
 
-  const onSubmit = (data) => {
-    const newTodo = data;
-    props.addItem.addNewItemtoList("wad");
-    console.log(newTodo);
+    // if (!date) {
+    //   alert("Add Date");
+    //   return;
+    // }
+
+    onAdd({ date, activity1 });
   };
 
   return props.showAddModal ? (
-    <form onSubmit={handleSubmit(onSubmit)} className={styles.AddModal}>
+    <form onSubmit={onSubmit} className={styles.AddModal}>
       <div onClick={props.closeAddModal} className={styles.Arrow}>
         <svg
           width="29"
@@ -29,13 +33,23 @@ const AddModal = (props) => {
         </svg>
       </div>
       <div className={styles.Wrapper}>
-        <h2>Datum:</h2>
-        <input type="text" name="date" ref={register} />
+        <label>Datum:</label>
+        <input
+          type="date"
+          name="date"
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
+        />
       </div>
 
       <div className={styles.Wrapper}>
         <p>09 Uhr</p>
-        <input type="text" name="activity1" ref={register} />
+        <input
+          type="text"
+          name="activity1"
+          value={activity1}
+          onChange={(e) => setActivity1(e.target.value)}
+        />
       </div>
 
       <div className={styles.Wrapper}>
