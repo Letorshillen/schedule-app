@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Crazy ToDo</string>
+    <string name="title_activity_main">Crazy ToDo</string>
+    <string name="package_name">io.ionic.CrazyToDo</string>
+    <string name="custom_url_scheme">io.ionic.CrazyToDo</string>
+</resources>

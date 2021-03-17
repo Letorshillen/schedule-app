@@ -1,0 +1,8 @@
+{
+    "appId": "io.ionic.CrazyToDo",
+    "appName": "Crazy ToDo",
+    "bundledWebRuntime": false,
+    "npmClient": "npm",
+    "webDir": "build",
+    "cordova": {}
+  }

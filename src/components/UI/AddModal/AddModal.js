@@ -44,7 +44,7 @@ const AddModal = (props) => {
   };
 
   return props.showAddModal ? (
-    <form onSubmit={onSubmit} className={styles.AddModal}>
+    <form autoComplete="off" onSubmit={onSubmit} className={styles.AddModal}>
       <div className={styles.Header}>
         <div onClick={props.closeAddModal} className={styles.Arrow}>
           <svg
@@ -78,8 +78,7 @@ const AddModal = (props) => {
 
       <div className={styles.Wrapper}>
         <label>09 Uhr:</label>
-        <input
-          type="text"
+        <textarea
           name="activity1"
           value={activity1}
           onChange={(e) => setActivity1(e.target.value)}
@@ -88,8 +87,7 @@ const AddModal = (props) => {
 
       <div className={styles.Wrapper}>
         <label>11 Uhr:</label>
-        <input
-          type="text"
+        <textarea
           name="activity2"
           value={activity2}
           onChange={(e) => setActivity2(e.target.value)}
@@ -98,8 +96,7 @@ const AddModal = (props) => {
 
       <div className={styles.Wrapper}>
         <label>13 Uhr:</label>
-        <input
-          type="text"
+        <textarea
           name="activity3"
           value={activity3}
           onChange={(e) => setActivity3(e.target.value)}
@@ -108,8 +105,7 @@ const AddModal = (props) => {
 
       <div className={styles.Wrapper}>
         <label>15 Uhr:</label>
-        <input
-          type="text"
+        <textarea
           name="activity4"
           value={activity4}
           onChange={(e) => setActivity4(e.target.value)}
@@ -118,8 +114,7 @@ const AddModal = (props) => {
 
       <div className={styles.Wrapper}>
         <label>17 Uhr:</label>
-        <input
-          type="text"
+        <textarea
           name="activity5"
           value={activity5}
           onChange={(e) => setActivity5(e.target.value)}
@@ -128,8 +123,7 @@ const AddModal = (props) => {
 
       <div className={styles.Wrapper}>
         <label>19 Uhr:</label>
-        <input
-          type="text"
+        <textarea
           name="activity6"
           value={activity6}
           onChange={(e) => setActivity6(e.target.value)}
@@ -138,8 +132,7 @@ const AddModal = (props) => {
 
       <div className={styles.Wrapper}>
         <label>21 Uhr:</label>
-        <input
-          type="text"
+        <textarea
           name="activity7"
           value={activity7}
           onChange={(e) => setActivity7(e.target.value)}

@@ -10,14 +10,14 @@
   border-radius: 20px;
   padding: 15px;
   font-family: inherit;
+  overflow-y: scroll;
 }
 
 .Wrapper {
-  margin-top: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 13px 10px;
+  padding: 20px 10px;
 }
 
 .Wrapper label {
@@ -25,14 +25,34 @@
   font-size: 25px;
 }
 
-.Wrapper input[type="text"],
+.Wrapper textarea,
 .Wrapper input[type="number"] {
-  border: 1px solid lightgray;
+  border: 0;
+  border-bottom: 1px solid #26a249;
   width: 65%;
-  height: 4vh;
+  height: 6vh;
   font-family: inherit;
   font-size: 20px;
+  padding: 5px;
+  transition: all 0.3s ease-out;
+  resize: none;
 }
+
+.Wrapper textarea:focus,
+.Wrapper input[type="number"]:focus{
+  background-color: #26a24918 ;
+  border: 0;
+  outline: 0;
+  border-bottom: 1px solid #04a0e2;
+}
+
+.Wrapper textarea:focus{
+  height: 100px
+}
+
+/* .InputTime{
+  width: 10px;
+} */
 
 button[type="submit"] {
   position: relative;
