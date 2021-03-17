@@ -65,6 +65,7 @@ const AddModal = (props) => {
       <div className={styles.Wrapper}>
         <label>Datum:</label>
         <input
+          className={styles.InputDate}
           type="number"
           step="0.01"
           min="1"
@@ -77,7 +78,23 @@ const AddModal = (props) => {
       </div>
 
       <div className={styles.Wrapper}>
-        <label>09 Uhr:</label>
+        <input
+          className={styles.InputTime}
+          type="number"
+          steps="1"
+          min="0"
+          max="24"
+          placeholder="00"
+        />
+        <span>:</span>
+        <input
+          className={styles.InputTime}
+          type="number"
+          steps="1"
+          min="0"
+          max="59"
+          placeholder="00"
+        />
         <textarea
           name="activity1"
           value={activity1}
