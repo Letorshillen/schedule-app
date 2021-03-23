@@ -13,19 +13,17 @@ const Layout = () => {
   const [todos, setTodos] = useState([
     {
       date: "How To",
-      activity1: "create a new ToDo",
-      activity2: "then u can delete this",
-      activity3: "easy peasy lemon sqeezy time",
-      activity4: "easy peasy lemon sqeezy time",
-      activity5: "easy peasy lemon sqeezy time",
-      activity6: "easy peasy lemon sqeezy time",
-      activity7: "easy peasy lemon sqeezy time",
+      activity: ["was", "tuen", "jetzt", "abau", "win", "ez"],
+      time1: [9, 10, 11, 12, 13, 14],
+      time2: [10, 20, 31, 42, 53, 54],
       showToDo: false,
       showDeleteModal: false,
     },
   ]);
   const [showBackdrop, setBackdrop] = useState(false);
   const [showAddModal, setAddModal] = useState(false);
+
+  console.log(todos);
 
   React.useEffect(() => {
     const data = localStorage.getItem("My-ToDos");
@@ -111,8 +109,6 @@ const Layout = () => {
   };
 
   const addNewItemToList = (newTodo) => {
-    console.log(newTodo);
-
     for (let i = 1; i < todos.length; i++) {
       if (newTodo.date === todos[i].date) {
         alert("stop");
@@ -120,10 +116,10 @@ const Layout = () => {
       }
     }
     setTodos([...todos, newTodo]);
+    console.log(todos);
     closeAddModalHandler();
   };
 
-  console.log(todos);
   let lastToDoItem = todos[todos.length - 1];
 
   let todosBig = null;

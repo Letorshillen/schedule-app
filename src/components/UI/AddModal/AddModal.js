@@ -5,13 +5,10 @@ import { FaCalendarCheck } from "react-icons/fa";
 
 const AddModal = (props) => {
   const [date, setDate] = useState("");
-  const [activity1, setActivity1] = useState("");
-  const [activity2, setActivity2] = useState("");
-  const [activity3, setActivity3] = useState("");
-  const [activity4, setActivity4] = useState("");
-  const [activity5, setActivity5] = useState("");
-  const [activity6, setActivity6] = useState("");
-  const [activity7, setActivity7] = useState("");
+  const [activity, setActivity] = useState([]);
+  const [time1, setTime1] = useState([]);
+  const [time2, setTime2] = useState([]);
+  const [inputFields, setFields] = useState(2);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -22,26 +19,60 @@ const AddModal = (props) => {
     }
     props.onAdd({
       date,
-      activity1,
-      activity2,
-      activity3,
-      activity4,
-      activity5,
-      activity6,
-      activity7,
+      activity,
+      time1,
+      time2,
       showToDo: false,
       showDeleteModal: false,
     });
 
     setDate("");
-    setActivity1("");
-    setActivity2("");
-    setActivity3("");
-    setActivity4("");
-    setActivity5("");
-    setActivity6("");
-    setActivity7("");
+    setActivity("");
+    setTime1("");
+    setTime2("");
   };
+
+  const addInputLine = () => {
+    setFields(inputFields + 1);
+  };
+
+  const handleTime1 = (i, e) => {
+    setTime1(...time1, e.target.value[i]);
+  };
+
+  let inputs = [];
+  for (let i = 0; i < inputFields; i++) {
+    inputs.push(
+      <div key={i} className={styles.Wrapper}>
+        <input
+          type="number"
+          step="1"
+          min="0"
+          max="24"
+          name={time1[i]}
+          value={time1[i]}
+          required
+          onChange={() => handleTime1}
+        />
+        :
+        <input
+          type="number"
+          step="1"
+          min="0"
+          max="24"
+          name={time2[i]}
+          value={time2[i]}
+          // required
+          onChange={(e) => setTime2(e.target.value[i])}
+        />
+        <textarea
+          name={activity[i]}
+          value={activity[i]}
+          onChange={(e) => setActivity(e.target.value[i])}
+        />
+      </div>
+    );
+  }
 
   return props.showAddModal ? (
     <form autoComplete="off" onSubmit={onSubmit} className={styles.AddModal}>
@@ -75,69 +106,8 @@ const AddModal = (props) => {
           onChange={(e) => setDate(e.target.value)}
         />
       </div>
-
-      <div className={styles.Wrapper}>
-        <label>09 Uhr:</label>
-        <textarea
-          name="activity1"
-          value={activity1}
-          onChange={(e) => setActivity1(e.target.value)}
-        />
-      </div>
-
-      <div className={styles.Wrapper}>
-        <label>11 Uhr:</label>
-        <textarea
-          name="activity2"
-          value={activity2}
-          onChange={(e) => setActivity2(e.target.value)}
-        />
-      </div>
-
-      <div className={styles.Wrapper}>
-        <label>13 Uhr:</label>
-        <textarea
-          name="activity3"
-          value={activity3}
-          onChange={(e) => setActivity3(e.target.value)}
-        />
-      </div>
-
-      <div className={styles.Wrapper}>
-        <label>15 Uhr:</label>
-        <textarea
-          name="activity4"
-          value={activity4}
-          onChange={(e) => setActivity4(e.target.value)}
-        />
-      </div>
-
-      <div className={styles.Wrapper}>
-        <label>17 Uhr:</label>
-        <textarea
-          name="activity5"
-          value={activity5}
-          onChange={(e) => setActivity5(e.target.value)}
-        />
-      </div>
-
-      <div className={styles.Wrapper}>
-        <label>19 Uhr:</label>
-        <textarea
-          name="activity6"
-          value={activity6}
-          onChange={(e) => setActivity6(e.target.value)}
-        />
-      </div>
-
-      <div className={styles.Wrapper}>
-        <label>21 Uhr:</label>
-        <textarea
-          name="activity7"
-          value={activity7}
-          onChange={(e) => setActivity7(e.target.value)}
-        />
-      </div>
+      {inputs}
+      <div onClick={addInputLine}>wass</div>
 
       <button type="submit" value="Submit">
         <FaCalendarCheck className={styles.SubmitBtnIcon} />

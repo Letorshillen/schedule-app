@@ -3,6 +3,18 @@ import styles from "./TodoCard.module.css";
 // import PropTypes from "prop-types";
 
 const TodoCard = (props) => {
+  // let todoactivity = [];
+
+  // for (let i = 0; i < props.length; i++) {
+  //   todoactivity.push(
+  //     <div className={styles.TimeTextContainer}>
+  //       <h2>
+  //         {props.time1}:{props.time2[i]}
+  //       </h2>
+  //       <p>{props.activity[i]}</p>
+  //     </div>
+  //   );
+  // }
   return (
     <div
       className={styles.ToDo}
@@ -28,47 +40,19 @@ const TodoCard = (props) => {
         </div>
         <h1>{props.date}</h1>
       </div>
-      <div className={styles.TimeTextContainer}>
-        <h2>09:00</h2>
-        <p>{props.activity1}</p>
-      </div>
-      <div className={styles.TimeTextContainer}>
-        <h2>11:00</h2>
-        <p>{props.activity2}</p>
-      </div>
-      <div className={styles.TimeTextContainer}>
-        <h2>13:00</h2>
-        <p>{props.activity3}</p>
-      </div>
-      <div className={styles.TimeTextContainer}>
-        <h2>15:00</h2>
-        <p>{props.activity4}</p>
-      </div>
-      <div className={styles.TimeTextContainer}>
-        <h2>17:00</h2>
-        <p>{props.activity5}</p>
-      </div>
-      <div className={styles.TimeTextContainer}>
-        <h2>19:00</h2>
-        <p>{props.activity6}</p>
-      </div>
-      <div className={styles.TimeTextContainer}>
-        <h2>21:00</h2>
-        <p>{props.activity7}</p>
-      </div>
+
+      {props.activity.map((_, i) => {
+        return (
+          <div key={i} className={styles.TimeTextContainer}>
+            <h2>
+              {props.time1[i]}:{props.time2[i]}
+            </h2>
+            <p>{props.activity[i]}</p>
+          </div>
+        );
+      })}
     </div>
   );
 };
-
-// TodoCard.propTypes = {
-//   date: PropTypes.number,
-//   activity1: PropTypes.string,
-//   activity2: PropTypes.string,
-//   activity3: PropTypes.string,
-//   activity4: PropTypes.string,
-//   activity5: PropTypes.string,
-//   activity6: PropTypes.string,
-//   activity7: PropTypes.string,
-// };
 
 export default TodoCard;
