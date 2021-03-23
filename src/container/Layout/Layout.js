@@ -143,13 +143,9 @@ const Layout = () => {
       <Backdrop showBackdrop={showBackdrop} />
       <ToDoListBigCard
         date={lastToDoItem.date}
-        activity1={lastToDoItem.activity1}
-        activity2={lastToDoItem.activity2}
-        activity3={lastToDoItem.activity3}
-        activity4={lastToDoItem.activity4}
-        activity5={lastToDoItem.activity5}
-        activity6={lastToDoItem.activity6}
-        activity7={lastToDoItem.activity7}
+        activity={lastToDoItem.activity}
+        time1={lastToDoItem.time1}
+        time2={lastToDoItem.time2}
       />
       <AddModal
         onAdd={addNewItemToList}
