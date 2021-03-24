@@ -2,6 +2,8 @@ import styles from "./AddModal.module.css";
 import { useState } from "react";
 
 import { FaCalendarCheck } from "react-icons/fa";
+import { BiPlus } from "react-icons/bi";
+import { BiMinus } from "react-icons/bi";
 
 const AddModal = (props) => {
   const [date, setDate] = useState("");
@@ -27,10 +29,6 @@ const AddModal = (props) => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    if (!date) {
-      alert("Add Date");
-      return;
-    }
     props.onAdd({
       date,
       tasks,
@@ -57,6 +55,16 @@ const AddModal = (props) => {
         activity: "",
       },
     ]);
+  };
+
+  const removeInputLine = (taskIndex) => {
+    if (tasks.length < 2) {
+      return;
+    }
+    const taskNew = [...tasks];
+
+    taskNew.splice(taskIndex, 1);
+    setTasks(taskNew);
   };
 
   return props.showAddModal ? (
@@ -95,6 +103,7 @@ const AddModal = (props) => {
       {tasks.map((task, index) => (
         <div key={index} className={styles.Wrapper}>
           <input
+            className={styles.InputTime}
             type="number"
             step="1"
             min="0"
@@ -104,12 +113,13 @@ const AddModal = (props) => {
             required
             onChange={(event) => handleChange(index, event)}
           />
-          :
+          <span>:</span>
           <input
+            className={styles.InputTime}
             type="number"
             step="1"
             min="0"
-            max="24"
+            max="60"
             name="time2"
             value={task.time2}
             required
@@ -122,7 +132,11 @@ const AddModal = (props) => {
           />
         </div>
       ))}
-      <div onClick={addInputLine}>wass</div>
+      <div className={styles.WrapperTaskBtn}>
+        <BiPlus className={styles.Plus} onClick={addInputLine} />
+        <BiMinus className={styles.Minus} onClick={removeInputLine} />
+      </div>
+
       <button type="submit" value="Submit">
         <FaCalendarCheck className={styles.SubmitBtnIcon} />
       </button>

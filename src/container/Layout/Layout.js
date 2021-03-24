@@ -15,14 +15,19 @@ const Layout = () => {
       date: "How To",
       tasks: [
         {
-          time1: 2,
-          time2: 3,
-          activity: "was",
+          time1: "00",
+          time2: "00",
+          activity: "neue Version",
         },
         {
-          time1: 3,
-          time2: 2,
-          activity: "jetzt",
+          time1: "01",
+          time2: "01",
+          activity: "Zeit flexibel einstellbar",
+        },
+        {
+          time1: "03",
+          time2: "03",
+          activity: "unendlich listeneinträge möglich",
         },
       ],
       showToDo: false,

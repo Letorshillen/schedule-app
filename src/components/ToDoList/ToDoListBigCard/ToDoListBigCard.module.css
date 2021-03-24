@@ -12,6 +12,10 @@
   overflow-y: scroll;
 }
 
+.ToDoListBigCard::-webkit-scrollbar {
+  display: none;
+}
+
 .TimeTextContainer {
   max-width: 100%;
   display: flex;

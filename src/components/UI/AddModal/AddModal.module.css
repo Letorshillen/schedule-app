@@ -76,16 +76,18 @@
   font-family: inherit;
   font-weight: bold;
   font-size: 24px;
-  margin: 0 -5px;
+  margin: 0 -20px;
 }
 
 button[type="submit"] {
-  position: relative;
+  position: sticky;
   border: 0;
   left: 50%;
   transform: translateX(-50%);
+  bottom: 10px;
   width: 55px;
   height: 55px;
+  box-shadow: 0px 0px 2px #27333871;
   background-color: #26a249;
   border-radius: 55px;
 }
@@ -101,4 +103,21 @@ button[type="submit"] {
   align-items: center;
   margin-top: 10px;
   padding: 0 10px;
+}
+
+input::-webkit-scrollbar,
+textarea::-webkit-scrollbar {
+  display: none;
+}
+
+.WrapperTaskBtn {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+}
+
+.Plus,
+.Minus {
+  font-size: 40px;
+  color: #1d1d1d;
 }
