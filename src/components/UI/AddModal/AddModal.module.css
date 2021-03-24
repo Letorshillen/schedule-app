@@ -26,7 +26,7 @@
 }
 
 .Wrapper textarea,
-.Wrapper input[type="number"] {
+.InputDate {
   border: 0;
   border-bottom: 1px solid #26a249;
   width: 65%;
@@ -39,20 +39,45 @@
 }
 
 .Wrapper textarea:focus,
-.Wrapper input[type="number"]:focus{
-  background-color: #26a24918 ;
+.InputDate:focus {
+  background-color: #26a24918;
   border: 0;
   outline: 0;
   border-bottom: 1px solid #04a0e2;
 }
 
-.Wrapper textarea:focus{
-  height: 100px
+.InputDate {
+  background-color: #26a24918;
+  width: 40%;
+  height: 50px;
+  font-size: 38px;
+  font-weight: bold;
 }
 
-/* .InputTime{
-  width: 10px;
-} */
+.InputTime {
+  border: 0;
+  border-bottom: 1px solid #04a0e2;
+  height: 6vh;
+  width: 30px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.InputTime:focus {
+  outline: 0;
+  border-bottom: 1px solid #26a249;
+  background-color: #049fe250;
+}
+
+.Wrapper textarea:focus {
+  height: 100px;
+}
+.Wrapper span {
+  font-family: inherit;
+  font-weight: bold;
+  font-size: 24px;
+  margin: 0 -5px;
+}
 
 button[type="submit"] {
   position: relative;

@@ -81,6 +81,7 @@ const AddModal = (props) => {
       <div className={styles.Wrapper}>
         <label>Datum:</label>
         <input
+          className={styles.InputDate}
           type="number"
           step="0.01"
           min="1"
@@ -122,7 +123,6 @@ const AddModal = (props) => {
         </div>
       ))}
       <div onClick={addInputLine}>wass</div>
-
       <button type="submit" value="Submit">
         <FaCalendarCheck className={styles.SubmitBtnIcon} />
       </button>
