@@ -5,13 +5,13 @@ const ToDoListBigCard = (props) => {
   return (
     <div className={styles.ToDoListBigCard}>
       <h1>{props.date}</h1>
-      {props.activity.map((_, i) => {
+      {props.tasks.map((task, index) => {
         return (
-          <div key={i} className={styles.TimeTextContainer}>
+          <div key={index} className={styles.TimeTextContainer}>
             <h2>
-              {props.time1[i]}:{props.time2[i]}
+              {task.time1}:{task.time2}
             </h2>
-            <p>{props.activity[i]}</p>
+            <p>{task.activity}</p>
           </div>
         );
       })}

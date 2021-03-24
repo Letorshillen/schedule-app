@@ -1,20 +1,7 @@
 import React from "react";
 import styles from "./TodoCard.module.css";
-// import PropTypes from "prop-types";
 
 const TodoCard = (props) => {
-  // let todoactivity = [];
-
-  // for (let i = 0; i < props.length; i++) {
-  //   todoactivity.push(
-  //     <div className={styles.TimeTextContainer}>
-  //       <h2>
-  //         {props.time1}:{props.time2[i]}
-  //       </h2>
-  //       <p>{props.activity[i]}</p>
-  //     </div>
-  //   );
-  // }
   return (
     <div
       className={styles.ToDo}
@@ -41,13 +28,13 @@ const TodoCard = (props) => {
         <h1>{props.date}</h1>
       </div>
 
-      {props.activity.map((_, i) => {
+      {props.tasks.map((task, index) => {
         return (
-          <div key={i} className={styles.TimeTextContainer}>
+          <div key={index} className={styles.TimeTextContainer}>
             <h2>
-              {props.time1[i]}:{props.time2[i]}
+              {task.time1}:{task.time2}
             </h2>
-            <p>{props.activity[i]}</p>
+            <p>{task.activity}</p>
           </div>
         );
       })}

@@ -5,10 +5,24 @@ import { FaCalendarCheck } from "react-icons/fa";
 
 const AddModal = (props) => {
   const [date, setDate] = useState("");
-  const [activity, setActivity] = useState([]);
-  const [time1, setTime1] = useState([]);
-  const [time2, setTime2] = useState([]);
-  const [inputFields, setFields] = useState(2);
+  const [tasks, setTasks] = useState([
+    {
+      time1: "",
+      time2: "",
+      activity: "",
+    },
+    {
+      time1: "",
+      time2: "",
+      activity: "",
+    },
+  ]);
+
+  const handleChange = (index, event) => {
+    const values = [...tasks];
+    values[index][event.target.name] = event.target.value;
+    setTasks(values);
+  };
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -19,60 +33,31 @@ const AddModal = (props) => {
     }
     props.onAdd({
       date,
-      activity,
-      time1,
-      time2,
+      tasks,
       showToDo: false,
       showDeleteModal: false,
     });
 
     setDate("");
-    setActivity("");
-    setTime1("");
-    setTime2("");
+    setTasks([
+      {
+        time1: "",
+        time2: "",
+        activity: "",
+      },
+    ]);
   };
 
   const addInputLine = () => {
-    setFields(inputFields + 1);
+    setTasks([
+      ...tasks,
+      {
+        time1: "",
+        time2: "",
+        activity: "",
+      },
+    ]);
   };
-
-  const handleTime1 = (i, e) => {
-    setTime1(...time1, e.target.value[i]);
-  };
-
-  let inputs = [];
-  for (let i = 0; i < inputFields; i++) {
-    inputs.push(
-      <div key={i} className={styles.Wrapper}>
-        <input
-          type="number"
-          step="1"
-          min="0"
-          max="24"
-          name={time1[i]}
-          value={time1[i]}
-          required
-          onChange={() => handleTime1}
-        />
-        :
-        <input
-          type="number"
-          step="1"
-          min="0"
-          max="24"
-          name={time2[i]}
-          value={time2[i]}
-          // required
-          onChange={(e) => setTime2(e.target.value[i])}
-        />
-        <textarea
-          name={activity[i]}
-          value={activity[i]}
-          onChange={(e) => setActivity(e.target.value[i])}
-        />
-      </div>
-    );
-  }
 
   return props.showAddModal ? (
     <form autoComplete="off" onSubmit={onSubmit} className={styles.AddModal}>
@@ -106,7 +91,36 @@ const AddModal = (props) => {
           onChange={(e) => setDate(e.target.value)}
         />
       </div>
-      {inputs}
+      {tasks.map((task, index) => (
+        <div key={index} className={styles.Wrapper}>
+          <input
+            type="number"
+            step="1"
+            min="0"
+            max="24"
+            name="time1"
+            value={task.time1}
+            required
+            onChange={(event) => handleChange(index, event)}
+          />
+          :
+          <input
+            type="number"
+            step="1"
+            min="0"
+            max="24"
+            name="time2"
+            value={task.time2}
+            required
+            onChange={(event) => handleChange(index, event)}
+          />
+          <textarea
+            name="activity"
+            value={task.activity}
+            onChange={(event) => handleChange(index, event)}
+          />
+        </div>
+      ))}
       <div onClick={addInputLine}>wass</div>
 
       <button type="submit" value="Submit">

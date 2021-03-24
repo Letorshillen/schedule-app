@@ -13,9 +13,18 @@ const Layout = () => {
   const [todos, setTodos] = useState([
     {
       date: "How To",
-      activity: ["was", "tuen", "jetzt", "abau", "win", "ez"],
-      time1: [9, 10, 11, 12, 13, 14],
-      time2: [10, 20, 31, 42, 53, 54],
+      tasks: [
+        {
+          time1: 2,
+          time2: 3,
+          activity: "was",
+        },
+        {
+          time1: 3,
+          time2: 2,
+          activity: "jetzt",
+        },
+      ],
       showToDo: false,
       showDeleteModal: false,
     },
@@ -116,7 +125,6 @@ const Layout = () => {
       }
     }
     setTodos([...todos, newTodo]);
-    console.log(todos);
     closeAddModalHandler();
   };
 
@@ -141,12 +149,7 @@ const Layout = () => {
       <div className={styles.ListWrapper}>{todolist}</div>
       {todosBig}
       <Backdrop showBackdrop={showBackdrop} />
-      <ToDoListBigCard
-        date={lastToDoItem.date}
-        activity={lastToDoItem.activity}
-        time1={lastToDoItem.time1}
-        time2={lastToDoItem.time2}
-      />
+      <ToDoListBigCard date={lastToDoItem.date} tasks={lastToDoItem.tasks} />
       <AddModal
         onAdd={addNewItemToList}
         closeAddModal={closeAddModalHandler}
