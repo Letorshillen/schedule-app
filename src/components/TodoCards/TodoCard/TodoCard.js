@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./TodoCard.module.css";
-// import PropTypes from "prop-types";
 
 const TodoCard = (props) => {
   return (
@@ -28,47 +27,19 @@ const TodoCard = (props) => {
         </div>
         <h1>{props.date}</h1>
       </div>
-      <div className={styles.TimeTextContainer}>
-        <h2>09:00</h2>
-        <p>{props.activity1}</p>
-      </div>
-      <div className={styles.TimeTextContainer}>
-        <h2>11:00</h2>
-        <p>{props.activity2}</p>
-      </div>
-      <div className={styles.TimeTextContainer}>
-        <h2>13:00</h2>
-        <p>{props.activity3}</p>
-      </div>
-      <div className={styles.TimeTextContainer}>
-        <h2>15:00</h2>
-        <p>{props.activity4}</p>
-      </div>
-      <div className={styles.TimeTextContainer}>
-        <h2>17:00</h2>
-        <p>{props.activity5}</p>
-      </div>
-      <div className={styles.TimeTextContainer}>
-        <h2>19:00</h2>
-        <p>{props.activity6}</p>
-      </div>
-      <div className={styles.TimeTextContainer}>
-        <h2>21:00</h2>
-        <p>{props.activity7}</p>
-      </div>
+
+      {props.tasks.map((task, index) => {
+        return (
+          <div key={index} className={styles.TimeTextContainer}>
+            <h2>
+              {task.time1}:{task.time2}
+            </h2>
+            <p>{task.activity}</p>
+          </div>
+        );
+      })}
     </div>
   );
 };
-
-// TodoCard.propTypes = {
-//   date: PropTypes.number,
-//   activity1: PropTypes.string,
-//   activity2: PropTypes.string,
-//   activity3: PropTypes.string,
-//   activity4: PropTypes.string,
-//   activity5: PropTypes.string,
-//   activity6: PropTypes.string,
-//   activity7: PropTypes.string,
-// };
 
 export default TodoCard;

@@ -8,13 +8,7 @@ export default class TodoCards extends Component {
         <TodoCard
           date={todo.date}
           key={todo.date}
-          activity1={todo.activity1}
-          activity2={todo.activity2}
-          activity3={todo.activity3}
-          activity4={todo.activity4}
-          activity5={todo.activity5}
-          activity6={todo.activity6}
-          activity7={todo.activity7}
+          tasks={todo.tasks}
           show={todo.showToDo}
           close={() => this.props.close(index)}
         />

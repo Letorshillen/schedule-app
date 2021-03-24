@@ -5,13 +5,24 @@ import { FaCalendarCheck } from "react-icons/fa";
 
 const AddModal = (props) => {
   const [date, setDate] = useState("");
-  const [activity1, setActivity1] = useState("");
-  const [activity2, setActivity2] = useState("");
-  const [activity3, setActivity3] = useState("");
-  const [activity4, setActivity4] = useState("");
-  const [activity5, setActivity5] = useState("");
-  const [activity6, setActivity6] = useState("");
-  const [activity7, setActivity7] = useState("");
+  const [tasks, setTasks] = useState([
+    {
+      time1: "",
+      time2: "",
+      activity: "",
+    },
+    {
+      time1: "",
+      time2: "",
+      activity: "",
+    },
+  ]);
+
+  const handleChange = (index, event) => {
+    const values = [...tasks];
+    values[index][event.target.name] = event.target.value;
+    setTasks(values);
+  };
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -22,25 +33,30 @@ const AddModal = (props) => {
     }
     props.onAdd({
       date,
-      activity1,
-      activity2,
-      activity3,
-      activity4,
-      activity5,
-      activity6,
-      activity7,
+      tasks,
       showToDo: false,
       showDeleteModal: false,
     });
 
     setDate("");
-    setActivity1("");
-    setActivity2("");
-    setActivity3("");
-    setActivity4("");
-    setActivity5("");
-    setActivity6("");
-    setActivity7("");
+    setTasks([
+      {
+        time1: "",
+        time2: "",
+        activity: "",
+      },
+    ]);
+  };
+
+  const addInputLine = () => {
+    setTasks([
+      ...tasks,
+      {
+        time1: "",
+        time2: "",
+        activity: "",
+      },
+    ]);
   };
 
   return props.showAddModal ? (
@@ -76,86 +92,37 @@ const AddModal = (props) => {
           onChange={(e) => setDate(e.target.value)}
         />
       </div>
-
-      <div className={styles.Wrapper}>
-        <input
-          className={styles.InputTime}
-          type="number"
-          steps="1"
-          min="0"
-          max="24"
-          placeholder="00"
-        />
-        <span>:</span>
-        <input
-          className={styles.InputTime}
-          type="number"
-          steps="1"
-          min="0"
-          max="59"
-          placeholder="00"
-        />
-        <textarea
-          name="activity1"
-          value={activity1}
-          onChange={(e) => setActivity1(e.target.value)}
-        />
-      </div>
-
-      <div className={styles.Wrapper}>
-        <label>11 Uhr:</label>
-        <textarea
-          name="activity2"
-          value={activity2}
-          onChange={(e) => setActivity2(e.target.value)}
-        />
-      </div>
-
-      <div className={styles.Wrapper}>
-        <label>13 Uhr:</label>
-        <textarea
-          name="activity3"
-          value={activity3}
-          onChange={(e) => setActivity3(e.target.value)}
-        />
-      </div>
-
-      <div className={styles.Wrapper}>
-        <label>15 Uhr:</label>
-        <textarea
-          name="activity4"
-          value={activity4}
-          onChange={(e) => setActivity4(e.target.value)}
-        />
-      </div>
-
-      <div className={styles.Wrapper}>
-        <label>17 Uhr:</label>
-        <textarea
-          name="activity5"
-          value={activity5}
-          onChange={(e) => setActivity5(e.target.value)}
-        />
-      </div>
-
-      <div className={styles.Wrapper}>
-        <label>19 Uhr:</label>
-        <textarea
-          name="activity6"
-          value={activity6}
-          onChange={(e) => setActivity6(e.target.value)}
-        />
-      </div>
-
-      <div className={styles.Wrapper}>
-        <label>21 Uhr:</label>
-        <textarea
-          name="activity7"
-          value={activity7}
-          onChange={(e) => setActivity7(e.target.value)}
-        />
-      </div>
-
+      {tasks.map((task, index) => (
+        <div key={index} className={styles.Wrapper}>
+          <input
+            type="number"
+            step="1"
+            min="0"
+            max="24"
+            name="time1"
+            value={task.time1}
+            required
+            onChange={(event) => handleChange(index, event)}
+          />
+          :
+          <input
+            type="number"
+            step="1"
+            min="0"
+            max="24"
+            name="time2"
+            value={task.time2}
+            required
+            onChange={(event) => handleChange(index, event)}
+          />
+          <textarea
+            name="activity"
+            value={task.activity}
+            onChange={(event) => handleChange(index, event)}
+          />
+        </div>
+      ))}
+      <div onClick={addInputLine}>wass</div>
       <button type="submit" value="Submit">
         <FaCalendarCheck className={styles.SubmitBtnIcon} />
       </button>

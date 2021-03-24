@@ -13,19 +13,26 @@ const Layout = () => {
   const [todos, setTodos] = useState([
     {
       date: "How To",
-      activity1: "create a new ToDo",
-      activity2: "then u can delete this",
-      activity3: "easy peasy lemon sqeezy time",
-      activity4: "easy peasy lemon sqeezy time",
-      activity5: "easy peasy lemon sqeezy time",
-      activity6: "easy peasy lemon sqeezy time",
-      activity7: "easy peasy lemon sqeezy time",
+      tasks: [
+        {
+          time1: 2,
+          time2: 3,
+          activity: "was",
+        },
+        {
+          time1: 3,
+          time2: 2,
+          activity: "jetzt",
+        },
+      ],
       showToDo: false,
       showDeleteModal: false,
     },
   ]);
   const [showBackdrop, setBackdrop] = useState(false);
   const [showAddModal, setAddModal] = useState(false);
+
+  console.log(todos);
 
   React.useEffect(() => {
     const data = localStorage.getItem("My-ToDos");
@@ -111,8 +118,6 @@ const Layout = () => {
   };
 
   const addNewItemToList = (newTodo) => {
-    console.log(newTodo);
-
     for (let i = 1; i < todos.length; i++) {
       if (newTodo.date === todos[i].date) {
         alert("stop");
@@ -123,7 +128,6 @@ const Layout = () => {
     closeAddModalHandler();
   };
 
-  console.log(todos);
   let lastToDoItem = todos[todos.length - 1];
 
   let todosBig = null;
@@ -145,16 +149,7 @@ const Layout = () => {
       <div className={styles.ListWrapper}>{todolist}</div>
       {todosBig}
       <Backdrop showBackdrop={showBackdrop} />
-      <ToDoListBigCard
-        date={lastToDoItem.date}
-        activity1={lastToDoItem.activity1}
-        activity2={lastToDoItem.activity2}
-        activity3={lastToDoItem.activity3}
-        activity4={lastToDoItem.activity4}
-        activity5={lastToDoItem.activity5}
-        activity6={lastToDoItem.activity6}
-        activity7={lastToDoItem.activity7}
-      />
+      <ToDoListBigCard date={lastToDoItem.date} tasks={lastToDoItem.tasks} />
       <AddModal
         onAdd={addNewItemToList}
         closeAddModal={closeAddModalHandler}
