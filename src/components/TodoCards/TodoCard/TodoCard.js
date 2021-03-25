@@ -30,7 +30,20 @@ const TodoCard = (props) => {
 
       {props.tasks.map((task, index) => {
         return (
-          <div key={index} className={styles.TimeTextContainer}>
+          <div
+            style={{
+              backgroundColor:
+                task.mood === 1
+                  ? "#26a24950"
+                  : task.mood === 2
+                  ? "#ff910360"
+                  : task.mood === 3
+                  ? "#f0291a50"
+                  : "white",
+            }}
+            key={index}
+            className={styles.TimeTextContainer}
+          >
             <h2>
               {task.time1}:{task.time2}
             </h2>

@@ -2,11 +2,9 @@
   display: flex;
   align-items: center;
   padding: 15px 10px;
-}
-
-.TimeTextContainer:nth-child(odd) {
-  background-color: #26a2492f;
   border-radius: 15px;
+  margin: 10px 0;
+  box-shadow: 0 0 5px rgba(100, 100, 100, 0.219);
 }
 
 .HeadContainer {

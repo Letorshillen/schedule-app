@@ -17,22 +17,62 @@
 }
 
 .TimeTextContainer {
-  max-width: 100%;
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-  padding: 18px 10px;
+  display: grid;
+  grid-template-columns: auto 50% auto;
+  padding: 15px 10px;
+  border-radius: 15px;
+  margin: 10px 0;
+  box-shadow: 0 0 5px rgba(100, 100, 100, 0.219);
 }
 
 .TimeTextContainer p {
-  margin-left: 20px;
+  /* margin: 0 10px; */
+  align-self: center;
+  justify-self: start;
+  font-size: 18px;
 }
 
-.TimeTextContainer:nth-child(odd) {
-  background-color: #26a2492f;
-  border-radius: 15px;
+.TimeTextContainer h2 {
+  align-self: center;
 }
 
 .ToDoListBigCard h1 {
   padding: 15px 10px;
+}
+
+.Dropdown {
+  transition: all 0.5s ease-out;
+  justify-self: end;
+  align-self: start;
+}
+
+.DropdownButton {
+  outline: 0;
+  border: 0;
+  background-color: transparent;
+  font-size: 25px;
+  height: 100%;
+}
+
+.DropdownButton:active {
+  color: blue;
+}
+
+.DropdownMenu {
+  display: flex;
+  align-items: center;
+  width: 50%;
+  text-decoration: none;
+  font-size: 40px;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 0 2px 1px rgba(100, 100, 100, 0.712);
+  padding: 10px;
+  color: black;
+}
+
+.DropdownItem {
+  width: 100%;
+  display: grid;
+  place-items: center;
 }

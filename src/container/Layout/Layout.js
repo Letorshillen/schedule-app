@@ -18,16 +18,44 @@ const Layout = () => {
           time1: "00",
           time2: "00",
           activity: "neue Version",
+          mood: 1,
         },
         {
           time1: "01",
           time2: "01",
           activity: "Zeit flexibel einstellbar",
+          mood: 2,
         },
         {
           time1: "03",
           time2: "03",
           activity: "unendlich listeneinträge möglich",
+          mood: 3,
+        },
+      ],
+      showToDo: false,
+      showDeleteModal: false,
+    },
+    {
+      date: "H12",
+      tasks: [
+        {
+          time1: "00",
+          time2: "00",
+          activity: "neue Version",
+          mood: 0,
+        },
+        {
+          time1: "01",
+          time2: "01",
+          activity: "Zeit flexibel einstellbar",
+          mood: 0,
+        },
+        {
+          time1: "03",
+          time2: "03",
+          activity: "unendlich listeneinträge möglich",
+          mood: 0,
         },
       ],
       showToDo: false,
@@ -133,6 +161,15 @@ const Layout = () => {
     closeAddModalHandler();
   };
 
+  const goodMoodhandler = (index) => {
+    const todoNew = [...todos];
+    const taskNew = {
+      ...todoNew[-1].tasks[index],
+    };
+    taskNew.mood = 1;
+    setTodos((todoNew = todos[-1]));
+  };
+
   let lastToDoItem = todos[todos.length - 1];
 
   let todosBig = null;
@@ -154,7 +191,11 @@ const Layout = () => {
       <div className={styles.ListWrapper}>{todolist}</div>
       {todosBig}
       <Backdrop showBackdrop={showBackdrop} />
-      <ToDoListBigCard date={lastToDoItem.date} tasks={lastToDoItem.tasks} />
+      <ToDoListBigCard
+        date={lastToDoItem.date}
+        tasks={lastToDoItem.tasks}
+        moodGood={goodMoodhandler}
+      />
       <AddModal
         onAdd={addNewItemToList}
         closeAddModal={closeAddModalHandler}

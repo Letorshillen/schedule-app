@@ -12,11 +12,13 @@ const AddModal = (props) => {
       time1: "",
       time2: "",
       activity: "",
+      mood: 0,
     },
     {
       time1: "",
       time2: "",
       activity: "",
+      mood: 0,
     },
   ]);
 
@@ -42,6 +44,7 @@ const AddModal = (props) => {
         time1: "",
         time2: "",
         activity: "",
+        mood: 0,
       },
     ]);
   };
@@ -53,17 +56,18 @@ const AddModal = (props) => {
         time1: "",
         time2: "",
         activity: "",
+        mood: 0,
       },
     ]);
   };
 
-  const removeInputLine = (taskIndex) => {
+  const removeInputLine = () => {
     if (tasks.length < 2) {
       return;
     }
     const taskNew = [...tasks];
 
-    taskNew.splice(taskIndex, 1);
+    taskNew.splice(-1, 1);
     setTasks(taskNew);
   };
 
