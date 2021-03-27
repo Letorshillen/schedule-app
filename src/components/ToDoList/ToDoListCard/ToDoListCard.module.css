@@ -16,14 +16,9 @@
   justify-content: space-between;
 }
 
-.deleteCross,
-.deleteCross::before {
-  cursor: pointer;
-  width: 20px;
-  height: 3px;
-  background-color: red;
-  border-radius: 1px;
-  transform: rotate(45deg);
+.deleteCross {
+  color: rgb(250, 71, 71);
+  font-size: 25px;
 }
 
 .deleteCross::before {

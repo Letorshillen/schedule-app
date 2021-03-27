@@ -50,10 +50,16 @@ const ToDoListBigCard = (props) => {
                   />
                 </Dropdown.Item>
                 <Dropdown.Item className={styles.DropdownItem}>
-                  <RiEmotionNormalLine style={{ color: "#ff9103" }} />
+                  <RiEmotionNormalLine
+                    style={{ color: "#ff9103" }}
+                    onClick={() => props.moodNeutral(index)}
+                  />
                 </Dropdown.Item>
                 <Dropdown.Item className={styles.DropdownItem}>
-                  <RiEmotionUnhappyLine style={{ color: "#f0291a" }} />
+                  <RiEmotionUnhappyLine
+                    style={{ color: "#f0291a" }}
+                    onClick={() => props.moodBad(index)}
+                  />
                 </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>

@@ -32,29 +32,10 @@ const Layout = () => {
           activity: "unendlich listeneinträge möglich",
           mood: 3,
         },
-      ],
-      showToDo: false,
-      showDeleteModal: false,
-    },
-    {
-      date: "H12",
-      tasks: [
         {
-          time1: "00",
-          time2: "00",
-          activity: "neue Version",
-          mood: 0,
-        },
-        {
-          time1: "01",
-          time2: "01",
-          activity: "Zeit flexibel einstellbar",
-          mood: 0,
-        },
-        {
-          time1: "03",
-          time2: "03",
-          activity: "unendlich listeneinträge möglich",
+          time1: "04",
+          time2: "04",
+          activity: "stimmung während der aktivität jetzt auswählbar",
           mood: 0,
         },
       ],
@@ -64,8 +45,6 @@ const Layout = () => {
   ]);
   const [showBackdrop, setBackdrop] = useState(false);
   const [showAddModal, setAddModal] = useState(false);
-
-  console.log(todos);
 
   React.useEffect(() => {
     const data = localStorage.getItem("My-ToDos");
@@ -163,11 +142,20 @@ const Layout = () => {
 
   const goodMoodhandler = (index) => {
     const todoNew = [...todos];
-    const taskNew = {
-      ...todoNew[-1].tasks[index],
-    };
-    taskNew.mood = 1;
-    setTodos((todoNew = todos[-1]));
+    todoNew[todoNew.length - 1].tasks[index].mood = 1;
+    setTodos(todoNew);
+  };
+
+  const neutralMoodhandler = (index) => {
+    const todoNew = [...todos];
+    todoNew[todoNew.length - 1].tasks[index].mood = 2;
+    setTodos(todoNew);
+  };
+
+  const badMoodhandler = (index) => {
+    const todoNew = [...todos];
+    todoNew[todoNew.length - 1].tasks[index].mood = 3;
+    setTodos(todoNew);
   };
 
   let lastToDoItem = todos[todos.length - 1];
@@ -195,6 +183,8 @@ const Layout = () => {
         date={lastToDoItem.date}
         tasks={lastToDoItem.tasks}
         moodGood={goodMoodhandler}
+        moodNeutral={neutralMoodhandler}
+        moodBad={badMoodhandler}
       />
       <AddModal
         onAdd={addNewItemToList}
