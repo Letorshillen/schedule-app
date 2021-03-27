@@ -11,8 +11,7 @@ export default class TodoCards extends Component {
           tasks={todo.tasks}
           show={todo.showToDo}
           close={() => this.props.close(index)}
-          editTasks={(event) => this.props.editTasks(index, event)}
-          editDate={(event) => this.props.editDate(index, event)}
+          editSubmit={(editedTodo) => this.props.editSubmit(index, editedTodo)}
         />
       );
     });

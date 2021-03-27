@@ -163,12 +163,28 @@ const Layout = () => {
   const addNewItemToList = (newTodo) => {
     for (let i = 1; i < todos.length; i++) {
       if (newTodo.date === todos[i].date) {
-        alert("stop");
+        alert("Schon ToDo für dieses Datum angelegt");
         return;
       }
     }
     setTodos([...todos, newTodo]);
     closeAddModalHandler();
+  };
+
+  const editItemHandler = (index, editedTodo) => {
+    for (let i = 1; i < todos.length; i++) {
+      if (
+        editedTodo.date === todos[i].date &&
+        editedTodo.date !== todos[index].date
+      ) {
+        alert("Schon ToDo für dieses Datum angelegt");
+        return;
+      }
+    }
+    const todoNew = [...todos];
+    todoNew[index] = editedTodo;
+    console.log(todoNew);
+    // setTodos(todoNew);
   };
 
   const goodMoodhandler = (index) => {
@@ -189,18 +205,6 @@ const Layout = () => {
     setTodos(todoNew);
   };
 
-  const editDateHandler = (index, event) => {
-    const todoNew = [...todos];
-    todos[index].date = event.target.value;
-    setTodos(todoNew);
-  };
-
-  const editTasksHandler = (index, event) => {
-    const todoNew = [...todos];
-    todoNew.tasks[index][event.target.name] = event.target.value;
-    setTodos(todoNew);
-  };
-
   let lastToDoItem = todos[todos.length - 1];
 
   let todosBig = null;
@@ -208,8 +212,7 @@ const Layout = () => {
     <TodoCards
       todos={todos}
       close={closeToDoCardHandler}
-      editTasks={editTasksHandler}
-      editDate={editDateHandler}
+      editSubmit={editItemHandler}
     />
   );
 

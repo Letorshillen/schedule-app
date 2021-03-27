@@ -49,15 +49,20 @@ const TodoCard = (props) => {
           );
         })}
       </div>
-      {showEdit ? (
-        <EditModal
-          date={props.date}
-          tasks={props.tasks}
-          close={() => setShowEdit(false)}
-          editTasks={props.editTasks}
-          editDate={props.editDate}
-        />
-      ) : null}
+      {showEdit
+        ? props.tasks.map((task, index) => {
+            return (
+              <EditModal
+                key={index}
+                date={props.date}
+                tasks={props.tasks}
+                close={() => setShowEdit(false)}
+                mood={task.mood}
+                editSubmit={props.editSubmit}
+              />
+            );
+          })
+        : null}
     </React.Fragment>
   );
 };

@@ -11,27 +11,22 @@ const EditModal = (props) => {
     let editedTasks = [];
 
     for (let i = 0; i < data.time1.length; i++) {
-      editedTasks[i] = [
-        {
-          time1: data.time1[i],
-          time2: data.time2[i],
-          activity: data.activity[i],
-          mood: 0,
-        },
-      ];
+      editedTasks[i] = {
+        time1: data.time1[i],
+        time2: data.time2[i],
+        activity: data.activity[i],
+        mood: props.mood,
+      };
     }
 
-    const dataArray = [
-      {
-        date: data.date,
-        tasks: editedTasks,
-        showToDo: false,
-        showDeleteModal: false,
-      },
-    ];
-    console.log(dataArray);
-    console.log(data);
+    props.editSubmit({
+      date: data.date,
+      tasks: editedTasks,
+      showToDo: true,
+      showDeleteModal: false,
+    });
   };
+
   return (
     <form
       autoComplete="off"
