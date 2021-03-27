@@ -42,6 +42,37 @@ const Layout = () => {
       showToDo: false,
       showDeleteModal: false,
     },
+    {
+      date: "12",
+      tasks: [
+        {
+          time1: "00",
+          time2: "00",
+          activity: "neue Version",
+          mood: 1,
+        },
+        {
+          time1: "01",
+          time2: "01",
+          activity: "Zeit flexibel einstellbar",
+          mood: 2,
+        },
+        {
+          time1: "03",
+          time2: "03",
+          activity: "unendlich listeneinträge möglich",
+          mood: 3,
+        },
+        {
+          time1: "04",
+          time2: "04",
+          activity: "stimmung während der aktivität jetzt auswählbar",
+          mood: 0,
+        },
+      ],
+      showToDo: false,
+      showDeleteModal: false,
+    },
   ]);
   const [showBackdrop, setBackdrop] = useState(false);
   const [showAddModal, setAddModal] = useState(false);
@@ -158,10 +189,29 @@ const Layout = () => {
     setTodos(todoNew);
   };
 
+  const editDateHandler = (index, event) => {
+    const todoNew = [...todos];
+    todos[index].date = event.target.value;
+    setTodos(todoNew);
+  };
+
+  const editTasksHandler = (index, event) => {
+    const todoNew = [...todos];
+    todoNew.tasks[index][event.target.name] = event.target.value;
+    setTodos(todoNew);
+  };
+
   let lastToDoItem = todos[todos.length - 1];
 
   let todosBig = null;
-  todosBig = <TodoCards todos={todos} close={closeToDoCardHandler} />;
+  todosBig = (
+    <TodoCards
+      todos={todos}
+      close={closeToDoCardHandler}
+      editTasks={editTasksHandler}
+      editDate={editDateHandler}
+    />
+  );
 
   let todolist = null;
   todolist = (

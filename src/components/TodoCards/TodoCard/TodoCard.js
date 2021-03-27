@@ -54,6 +54,8 @@ const TodoCard = (props) => {
           date={props.date}
           tasks={props.tasks}
           close={() => setShowEdit(false)}
+          editTasks={props.editTasks}
+          editDate={props.editDate}
         />
       ) : null}
     </React.Fragment>

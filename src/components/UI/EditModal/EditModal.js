@@ -3,10 +3,41 @@ import styles from "./EditModal.module.css";
 import { FaCalendarCheck } from "react-icons/fa";
 import { BiPlus } from "react-icons/bi";
 import { BiMinus } from "react-icons/bi";
+import { useForm } from "react-hook-form";
 
 const EditModal = (props) => {
+  const { register, handleSubmit, watch } = useForm();
+  const onSubmit = (data) => {
+    let editedTasks = [];
+
+    for (let i = 0; i < data.time1.length; i++) {
+      editedTasks[i] = [
+        {
+          time1: data.time1[i],
+          time2: data.time2[i],
+          activity: data.activity[i],
+          mood: 0,
+        },
+      ];
+    }
+
+    const dataArray = [
+      {
+        date: data.date,
+        tasks: editedTasks,
+        showToDo: false,
+        showDeleteModal: false,
+      },
+    ];
+    console.log(dataArray);
+    console.log(data);
+  };
   return (
-    <form autoComplete="off" className={styles.AddModal}>
+    <form
+      autoComplete="off"
+      onSubmit={handleSubmit(onSubmit)}
+      className={styles.AddModal}
+    >
       <div className={styles.Header}>
         <div onClick={props.close} className={styles.Arrow}>
           <svg
@@ -33,9 +64,9 @@ const EditModal = (props) => {
           min="1"
           max="31.12"
           name="date"
-          value={props.date}
+          defaultValue={props.date}
+          ref={register({ required: true })}
           required
-          //   onChange={(e) => setDate(e.target.value)}
         />
       </div>
       {props.tasks.map((task, index) => (
@@ -46,10 +77,10 @@ const EditModal = (props) => {
             step="1"
             min="0"
             max="24"
-            name="time1"
-            value={task.time1}
+            name={`time1[${index}]`}
+            defaultValue={task.time1}
+            ref={register({ required: true })}
             required
-            // onChange={(event) => handleChange(index, event)}
           />
           <span>:</span>
           <input
@@ -58,15 +89,15 @@ const EditModal = (props) => {
             step="1"
             min="0"
             max="60"
-            name="time2"
-            value={task.time2}
+            name={`time2[${index}]`}
+            defaultValue={task.time2}
+            ref={register({ required: true })}
             required
-            // onChange={(event) => handleChange(index, event)}
           />
           <textarea
-            name="activity"
-            value={task.activity}
-            // onChange={(event) => handleChange(index, event)}
+            name={`activity[${index}]`}
+            defaultValue={task.activity}
+            ref={register}
           />
         </div>
       ))}
