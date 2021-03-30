@@ -21,9 +21,7 @@
   font-size: 25px;
 }
 
-.deleteCross::before {
-  position: absolute;
-  content: "";
-  background-color: red;
-  transform: rotate(-90deg);
+.info {
+  margin-right: -10px;
+  font-size: 25px;
 }

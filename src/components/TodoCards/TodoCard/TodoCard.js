@@ -4,6 +4,13 @@ import { IoMdClose } from "react-icons/io";
 import { FiEdit } from "react-icons/fi";
 import EditModal from "../../UI/EditModal/EditModal";
 import { useState } from "react";
+import Dropdown from "react-bootstrap/Dropdown";
+import {
+  RiEmotionHappyLine,
+  RiEmotionUnhappyLine,
+  RiEmotionLine,
+  RiEmotionNormalLine,
+} from "react-icons/ri";
 
 const TodoCard = (props) => {
   const [showEdit, setShowEdit] = useState(false);
@@ -20,7 +27,9 @@ const TodoCard = (props) => {
         }}
       >
         <div className={styles.HeadContainer}>
-          <h1>{props.date}</h1>
+          <h1>
+            {props.date1}.{props.date2}
+          </h1>
           <FiEdit onClick={() => setShowEdit(true)} className={styles.Edit} />
           <IoMdClose onClick={props.close} className={styles.Close} />
         </div>
@@ -45,24 +54,51 @@ const TodoCard = (props) => {
                 {task.time1}:{task.time2}
               </h2>
               <p>{task.activity}</p>
+              <Dropdown className={styles.Dropdown}>
+                <Dropdown.Toggle
+                  className={styles.DropdownButton}
+                  variant="success"
+                  id="dropdown-basic"
+                >
+                  <RiEmotionHappyLine />
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu className={styles.DropdownMenu}>
+                  <Dropdown.Item className={styles.DropdownItem}>
+                    <RiEmotionLine
+                      style={{ color: "#26a249" }}
+                      onClick={() => props.moodGood(index)}
+                    />
+                  </Dropdown.Item>
+                  <Dropdown.Item className={styles.DropdownItem}>
+                    <RiEmotionNormalLine
+                      style={{ color: "#ff9103" }}
+                      onClick={() => props.moodNeutral(index)}
+                    />
+                  </Dropdown.Item>
+                  <Dropdown.Item className={styles.DropdownItem}>
+                    <RiEmotionUnhappyLine
+                      style={{ color: "#f0291a" }}
+                      onClick={() => props.moodBad(index)}
+                    />
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
             </div>
           );
         })}
       </div>
-      {showEdit
-        ? props.tasks.map((task, index) => {
-            return (
-              <EditModal
-                key={index}
-                date={props.date}
-                tasks={props.tasks}
-                close={() => setShowEdit(false)}
-                mood={task.mood}
-                editSubmit={props.editSubmit}
-              />
-            );
-          })
-        : null}
+      {showEdit ? (
+        <EditModal
+          addTaskLine={props.addTaskLine}
+          removeTaskLine={props.removeTaskLine}
+          date1={props.date1}
+          date2={props.date2}
+          tasks={props.tasks}
+          close={() => setShowEdit(false)}
+          editSubmit={props.editSubmit}
+        />
+      ) : null}
     </React.Fragment>
   );
 };

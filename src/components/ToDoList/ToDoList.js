@@ -13,8 +13,9 @@ const ToDoList = (props) => {
           />
         ) : null}
         <ToDoListCard
-          date={todo.date}
-          key={todo.date}
+          date1={todo.date1}
+          date2={todo.date2}
+          key={index}
           showDeleteModal={() => props.showDeleteModal(index)}
           openCard={() => props.openCard(index)}
         />

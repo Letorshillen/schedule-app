@@ -49,4 +49,38 @@
 
 .ToDo p {
   margin-left: 25px;
+  flex-grow: 2;
+}
+
+.Dropdown {
+  transition: all 0.5s ease-out;
+  justify-self: end;
+  align-self: start;
+}
+
+.DropdownButton {
+  outline: 0;
+  border: 0;
+  background-color: transparent;
+  font-size: 25px;
+  height: 100%;
+}
+
+.DropdownMenu {
+  display: flex;
+  align-items: center;
+  width: 50%;
+  text-decoration: none;
+  font-size: 40px;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 0 2px 1px rgba(100, 100, 100, 0.712);
+  padding: 10px;
+  color: black;
+}
+
+.DropdownItem {
+  width: 100%;
+  display: grid;
+  place-items: center;
 }

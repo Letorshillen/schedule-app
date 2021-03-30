@@ -1,12 +1,13 @@
 import styles from "./AddModal.module.css";
 import { useState } from "react";
-
+import { IoMdClose } from "react-icons/io";
 import { FaCalendarCheck } from "react-icons/fa";
-import { BiPlus } from "react-icons/bi";
-import { BiMinus } from "react-icons/bi";
+import { AiOutlinePlusCircle } from "react-icons/ai";
+import { AiOutlineMinusCircle } from "react-icons/ai";
 
 const AddModal = (props) => {
-  const [date, setDate] = useState("");
+  const [date1, setDate1] = useState("");
+  const [date2, setDate2] = useState("");
   const [tasks, setTasks] = useState([
     {
       time1: "",
@@ -32,13 +33,15 @@ const AddModal = (props) => {
     e.preventDefault();
 
     props.onAdd({
-      date,
+      date1,
+      date2,
       tasks,
       showToDo: false,
       showDeleteModal: false,
     });
 
-    setDate("");
+    setDate1("");
+    setDate2("");
     setTasks([
       {
         time1: "",
@@ -74,34 +77,35 @@ const AddModal = (props) => {
   return props.showAddModal ? (
     <form autoComplete="off" onSubmit={onSubmit} className={styles.AddModal}>
       <div className={styles.Header}>
-        <div onClick={props.closeAddModal} className={styles.Arrow}>
-          <svg
-            width="29"
-            height="24"
-            viewBox="0 0 29 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M0.939338 10.9393C0.353551 11.5251 0.353551 12.4749 0.939338 13.0607L10.4853 22.6066C11.0711 23.1924 12.0208 23.1924 12.6066 22.6066C13.1924 22.0208 13.1924 21.0711 12.6066 20.4853L4.12132 12L12.6066 3.51472C13.1924 2.92893 13.1924 1.97918 12.6066 1.3934C12.0208 0.807612 11.0711 0.807612 10.4853 1.3934L0.939338 10.9393ZM29 10.5L2 10.5V13.5L29 13.5V10.5Z"
-              fill="black"
-            />
-          </svg>
-        </div>
-        <h1>Neuer Tag</h1>
+        <h1>Neues ToDo</h1>
+        <IoMdClose onClick={props.closeAddModal} className={styles.Close} />
       </div>
+
       <div className={styles.Wrapper}>
         <label>Datum:</label>
         <input
           className={styles.InputDate}
           type="number"
-          step="0.01"
+          step="1"
           min="1"
-          max="31.12"
-          name="date"
-          value={date}
+          max="31"
+          name="date1"
+          value={date1}
           required
-          onChange={(e) => setDate(e.target.value)}
+          onChange={(e) => setDate1(e.target.value)}
+        />
+        <p>.</p>
+        <input
+          className={styles.InputDate}
+          type="number"
+          step="1"
+          min="1"
+          max="12"
+          maxLength="2"
+          name="date2"
+          value={date2}
+          required
+          onChange={(e) => setDate2(e.target.value)}
         />
       </div>
       {tasks.map((task, index) => (
@@ -137,8 +141,11 @@ const AddModal = (props) => {
         </div>
       ))}
       <div className={styles.WrapperTaskBtn}>
-        <BiPlus className={styles.Plus} onClick={addInputLine} />
-        <BiMinus className={styles.Minus} onClick={removeInputLine} />
+        <AiOutlinePlusCircle className={styles.Plus} onClick={addInputLine} />
+        <AiOutlineMinusCircle
+          className={styles.Minus}
+          onClick={removeInputLine}
+        />
       </div>
 
       <button type="submit" value="Submit">

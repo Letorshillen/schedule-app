@@ -11,7 +11,9 @@ import {
 const ToDoListBigCard = (props) => {
   return (
     <div className={styles.ToDoListBigCard}>
-      <h1>{props.date}</h1>
+      <h1>
+        {props.date1}.{props.date2}
+      </h1>
       {props.tasks.map((task, index) => {
         return (
           <div

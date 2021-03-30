@@ -12,7 +12,8 @@ import styles from "./Layout.module.css";
 const Layout = () => {
   const [todos, setTodos] = useState([
     {
-      date: "How To",
+      date1: "How",
+      date2: "To",
       tasks: [
         {
           time1: "00",
@@ -36,38 +37,13 @@ const Layout = () => {
           time1: "04",
           time2: "04",
           activity: "stimmung während der aktivität jetzt auswählbar",
-          mood: 0,
-        },
-      ],
-      showToDo: false,
-      showDeleteModal: false,
-    },
-    {
-      date: "12",
-      tasks: [
-        {
-          time1: "00",
-          time2: "00",
-          activity: "neue Version",
           mood: 1,
         },
         {
-          time1: "01",
-          time2: "01",
-          activity: "Zeit flexibel einstellbar",
+          time1: "05",
+          time2: "05",
+          activity: "jetzt auch todos editieren",
           mood: 2,
-        },
-        {
-          time1: "03",
-          time2: "03",
-          activity: "unendlich listeneinträge möglich",
-          mood: 3,
-        },
-        {
-          time1: "04",
-          time2: "04",
-          activity: "stimmung während der aktivität jetzt auswählbar",
-          mood: 0,
         },
       ],
       showToDo: false,
@@ -85,6 +61,14 @@ const Layout = () => {
   React.useEffect(() => {
     localStorage.setItem("My-ToDos", JSON.stringify(todos));
   });
+
+  React.useEffect(() => {
+    for (let i = 0; i < todos.length; i++) {
+      if (todos[i].showToDo || todos[i].showDeleteModal) {
+        setBackdrop(true);
+      }
+    }
+  }, [todos]);
 
   const closeToDoCardHandler = (todoIndex) => {
     const todo = {
@@ -161,30 +145,59 @@ const Layout = () => {
   };
 
   const addNewItemToList = (newTodo) => {
-    for (let i = 1; i < todos.length; i++) {
-      if (newTodo.date === todos[i].date) {
-        alert("Schon ToDo für dieses Datum angelegt");
-        return;
-      }
-    }
+    // for (let i = 1; i < todos.length; i++) {
+    //   if (
+    //     newTodo.date1 === todos[i].date1 &&
+    //     newTodo.date2 === todos[i].date2
+    //   ) {
+    //     alert("Schon ToDo für dieses Datum angelegt");
+    //     return;
+    //   }
+    // }
     setTodos([...todos, newTodo]);
     closeAddModalHandler();
   };
 
-  const editItemHandler = (index, editedTodo) => {
-    for (let i = 1; i < todos.length; i++) {
-      if (
-        editedTodo.date === todos[i].date &&
-        editedTodo.date !== todos[index].date
-      ) {
-        alert("Schon ToDo für dieses Datum angelegt");
-        return;
-      }
+  const addTaskLine = (index) => {
+    const todoNew = [...todos];
+    todoNew[index].tasks = [
+      ...todoNew[index].tasks,
+      {
+        time1: "",
+        time2: "",
+        activity: "",
+        mood: 0,
+      },
+    ];
+    setTodos(todoNew);
+  };
+
+  const removeTaskLine = (index) => {
+    if (todos[index].tasks.length < 2) {
+      return;
     }
+
+    const todoNew = [...todos];
+    todoNew[index].tasks.splice(-1, 1);
+
+    setTodos(todoNew);
+  };
+
+  const editItemHandler = (index, editedTodo) => {
+    // for (let i = 1; i < todos.length; i++) {
+    //   if (
+    //     editedTodo.date1 === todos[i].date1 &&
+    //     editedTodo.date1 !== todos[index].date1 &&
+    //     editedTodo.date2 === todos[i].date2 &&
+    //     editedTodo.date2 !== todos[index].date2
+    //   ) {
+    //     alert("Schon ToDo für dieses Datum angelegt");
+    //     return;
+    //   }
+    // }
     const todoNew = [...todos];
     todoNew[index] = editedTodo;
-    console.log(todoNew);
-    // setTodos(todoNew);
+    setTodos(todoNew);
   };
 
   const goodMoodhandler = (index) => {
@@ -213,6 +226,11 @@ const Layout = () => {
       todos={todos}
       close={closeToDoCardHandler}
       editSubmit={editItemHandler}
+      moodGood={goodMoodhandler}
+      moodNeutral={neutralMoodhandler}
+      moodBad={badMoodhandler}
+      addTaskLine={addTaskLine}
+      removeTaskLine={removeTaskLine}
     />
   );
 
@@ -233,7 +251,8 @@ const Layout = () => {
       {todosBig}
       <Backdrop showBackdrop={showBackdrop} />
       <ToDoListBigCard
-        date={lastToDoItem.date}
+        date1={lastToDoItem.date1}
+        date2={lastToDoItem.date2}
         tasks={lastToDoItem.tasks}
         moodGood={goodMoodhandler}
         moodNeutral={neutralMoodhandler}

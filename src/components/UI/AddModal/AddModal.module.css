@@ -48,10 +48,21 @@
 
 .InputDate {
   background-color: #26a24918;
-  width: 40%;
+  width: 20%;
   height: 50px;
   font-size: 38px;
   font-weight: bold;
+}
+
+label {
+  flex-grow: 2;
+}
+
+.Wrapper p {
+  font-size: 30px;
+  margin: 10px 5px;
+  margin-bottom: -10px;
+  bottom: 0;
 }
 
 .InputTime {
@@ -118,6 +129,11 @@ textarea::-webkit-scrollbar {
 
 .Plus,
 .Minus {
-  font-size: 40px;
-  color: #1d1d1d;
+  font-size: 30px;
+  color: #8d8d8d;
+}
+
+.Close {
+  color: rgb(75, 75, 75);
+  font-size: 28px;
 }

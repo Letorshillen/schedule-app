@@ -6,11 +6,17 @@ export default class TodoCards extends Component {
     return this.props.todos.map((todo, index) => {
       return (
         <TodoCard
-          date={todo.date}
-          key={todo.date}
+          date1={todo.date1}
+          date2={todo.date2}
+          key={index}
           tasks={todo.tasks}
           show={todo.showToDo}
           close={() => this.props.close(index)}
+          moodGood={this.props.moodGood}
+          moodNeutral={this.props.moodNeutral}
+          moodBad={this.props.moodBad}
+          addTaskLine={() => this.props.addTaskLine(index)}
+          removeTaskLine={() => this.props.removeTaskLine(index)}
           editSubmit={(editedTodo) => this.props.editSubmit(index, editedTodo)}
         />
       );
