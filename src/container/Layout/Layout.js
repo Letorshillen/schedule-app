@@ -3,7 +3,7 @@ import React from "react";
 import TodoCards from "../../components/TodoCards/TodoCards";
 import ToDoList from "../../components/ToDoList/ToDoList";
 import ToDoListBigCard from "../../components/ToDoList/ToDoListBigCard/ToDoListBigCard";
-import AddBtn from "../../components/UI/AddBtn/AddBtn";
+import BottomBar from "../../components/UI/BottomBar/BottomBar";
 import AddModal from "../../components/UI/AddModal/AddModal";
 import Backdrop from "../../components/UI/Backdrop/Backdrop";
 
@@ -263,7 +263,7 @@ const Layout = () => {
         closeAddModal={closeAddModalHandler}
         showAddModal={showAddModal}
       />
-      <AddBtn openAddModal={openAddModalHandler} />
+      <BottomBar openAddModal={openAddModalHandler} />
     </React.Fragment>
   );
 };
