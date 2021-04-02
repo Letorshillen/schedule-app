@@ -15,6 +15,16 @@ import {
 const TodoCard = (props) => {
   const [showEdit, setShowEdit] = useState(false);
 
+  const openEditHandler = () => {
+    props.saveBackup();
+    setShowEdit(true);
+  };
+
+  const closeEditHandler = () => {
+    props.editBackup();
+    setShowEdit(false);
+  };
+
   return (
     <React.Fragment>
       <div
@@ -30,7 +40,7 @@ const TodoCard = (props) => {
           <h1>
             {props.date1}.{props.date2}
           </h1>
-          <FiEdit onClick={() => setShowEdit(true)} className={styles.Edit} />
+          <FiEdit onClick={openEditHandler} className={styles.Edit} />
           <IoMdClose onClick={props.close} className={styles.Close} />
         </div>
 
@@ -95,7 +105,7 @@ const TodoCard = (props) => {
           date1={props.date1}
           date2={props.date2}
           tasks={props.tasks}
-          close={() => setShowEdit(false)}
+          close={closeEditHandler}
           editSubmit={props.editSubmit}
         />
       ) : null}

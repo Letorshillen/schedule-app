@@ -158,6 +158,16 @@ const Layout = () => {
     closeAddModalHandler();
   };
 
+  const saveBackup = () => {
+    const prevTodo = [...todos];
+    editBackup(prevTodo);
+  };
+
+  const editBackup = (prevTodo) => {
+    console.log("hallo2");
+    setTodos(prevTodo);
+  };
+
   const addTaskLine = (index) => {
     const todoNew = [...todos];
     todoNew[index].tasks = [
@@ -229,6 +239,8 @@ const Layout = () => {
       moodGood={goodMoodhandler}
       moodNeutral={neutralMoodhandler}
       moodBad={badMoodhandler}
+      saveBackup={saveBackup}
+      editBackup={editBackup}
       addTaskLine={addTaskLine}
       removeTaskLine={removeTaskLine}
     />

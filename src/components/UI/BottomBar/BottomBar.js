@@ -3,6 +3,7 @@ import styles from "./BottomBar.module.css";
 
 import { FaCalendarPlus } from "react-icons/fa";
 import { IoMdSettings } from "react-icons/io";
+import { FiLogIn } from "react-icons/fi";
 
 const BottomBar = (props) => {
   return (
@@ -14,7 +15,7 @@ const BottomBar = (props) => {
         <FaCalendarPlus className={styles.BottomIcon} />
       </button>
       <button className={styles.BottomBtn}>
-        <FaCalendarPlus className={styles.BottomIcon} />
+        <FiLogIn className={styles.BottomIcon} />
       </button>
     </div>
   );
