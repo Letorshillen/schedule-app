@@ -16,7 +16,7 @@ const TodoCard = (props) => {
   const [showEdit, setShowEdit] = useState(false);
 
   const openEditHandler = () => {
-    props.saveBackup();
+    props.createBackup();
     setShowEdit(true);
   };
 

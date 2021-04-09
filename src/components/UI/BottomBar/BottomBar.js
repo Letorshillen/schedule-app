@@ -8,7 +8,7 @@ import { FiLogIn } from "react-icons/fi";
 const BottomBar = (props) => {
   return (
     <div className={styles.Wrapper}>
-      <button className={styles.BottomBtn}>
+      <button className={styles.BottomBtn} onClick={props.openSettings}>
         <IoMdSettings className={styles.BottomIcon} />
       </button>
       <button className={styles.BottomBtn} onClick={props.openAddModal}>

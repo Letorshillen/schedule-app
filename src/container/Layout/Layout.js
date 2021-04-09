@@ -8,6 +8,7 @@ import AddModal from "../../components/UI/AddModal/AddModal";
 import Backdrop from "../../components/UI/Backdrop/Backdrop";
 
 import styles from "./Layout.module.css";
+import Settings from "../../components/Settings/Settings";
 
 const Layout = () => {
   const [todos, setTodos] = useState([
@@ -52,6 +53,7 @@ const Layout = () => {
   ]);
   const [showBackdrop, setBackdrop] = useState(false);
   const [showAddModal, setAddModal] = useState(false);
+  const [settings, setSettings] = useState({ show: false, image: "" });
 
   React.useEffect(() => {
     const data = localStorage.getItem("My-ToDos");
@@ -158,14 +160,16 @@ const Layout = () => {
     closeAddModalHandler();
   };
 
-  const saveBackup = () => {
-    const prevTodo = [...todos];
-    editBackup(prevTodo);
+  const todoSave = [];
+
+  const createBackup = () => {
+    todoSave.push(todos);
+    console.log(todoSave);
   };
 
-  const editBackup = (prevTodo) => {
-    console.log("hallo2");
-    setTodos(prevTodo);
+  const editBackup = () => {
+    console.log(todoSave);
+    setTodos(todoSave);
   };
 
   const addTaskLine = (index) => {
@@ -228,6 +232,21 @@ const Layout = () => {
     setTodos(todoNew);
   };
 
+  const openSettingsHandler = () => {
+    const settingsNew = { ...settings };
+    settingsNew.show = !settingsNew.show;
+
+    setSettings(settingsNew);
+  };
+
+  const changeBackground = (e) => {
+    const settingsNew = { ...settings };
+    let file = e.target.file;
+    settingsNew.image = file;
+    setSettings(settingsNew);
+    console.log(settings);
+  };
+
   let lastToDoItem = todos[todos.length - 1];
 
   let todosBig = null;
@@ -239,7 +258,7 @@ const Layout = () => {
       moodGood={goodMoodhandler}
       moodNeutral={neutralMoodhandler}
       moodBad={badMoodhandler}
-      saveBackup={saveBackup}
+      createBackup={createBackup}
       editBackup={editBackup}
       addTaskLine={addTaskLine}
       removeTaskLine={removeTaskLine}
@@ -259,6 +278,7 @@ const Layout = () => {
 
   return (
     <React.Fragment>
+      <Settings show={settings.show} changeBackground={changeBackground} />
       <div className={styles.ListWrapper}>{todolist}</div>
       {todosBig}
       <Backdrop showBackdrop={showBackdrop} />
@@ -275,7 +295,10 @@ const Layout = () => {
         closeAddModal={closeAddModalHandler}
         showAddModal={showAddModal}
       />
-      <BottomBar openAddModal={openAddModalHandler} />
+      <BottomBar
+        openSettings={openSettingsHandler}
+        openAddModal={openAddModalHandler}
+      />
     </React.Fragment>
   );
 };
