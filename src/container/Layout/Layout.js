@@ -9,6 +9,7 @@ import Backdrop from "../../components/UI/Backdrop/Backdrop";
 
 import styles from "./Layout.module.css";
 import Settings from "../../components/Settings/Settings";
+import BgImg from "../../components/UI/BgImg/BgImg";
 
 const Layout = () => {
   const [todos, setTodos] = useState([
@@ -239,13 +240,14 @@ const Layout = () => {
     setSettings(settingsNew);
   };
 
-  const changeBackground = (e) => {
+  const changeBackground = (event) => {
     const settingsNew = { ...settings };
-    let file = e.target.file;
-    settingsNew.image = file;
+
+    settingsNew.image = URL.createObjectURL(event.target.files[0]);
     setSettings(settingsNew);
-    console.log(settings);
   };
+
+  console.log(settings);
 
   let lastToDoItem = todos[todos.length - 1];
 
@@ -299,6 +301,8 @@ const Layout = () => {
         openSettings={openSettingsHandler}
         openAddModal={openAddModalHandler}
       />
+      <BgImg image={settings.image} />
+      <div className="bg-color"></div>
     </React.Fragment>
   );
 };

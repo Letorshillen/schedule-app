@@ -8,7 +8,8 @@ const Settings = (props) => {
       <input
         type="file"
         name="file"
-        onChange={(e) => props.changeBackground(e)}
+        accept="image/*"
+        onChange={props.changeBackground}
       />
       <p>Hintergrundbild</p>
       <p>Hintergrundbild</p>

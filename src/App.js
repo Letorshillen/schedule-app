@@ -6,7 +6,6 @@ function App() {
   return (
     <React.Fragment>
       <Layout />
-      <div className="bg-color"></div>
     </React.Fragment>
   );
 }
