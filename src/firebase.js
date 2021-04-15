@@ -1,15 +1,20 @@
 import firebase from "firebase/app";
 import "firebase/auth";
+import "firebase/firestore";
 
 const app = firebase.initializeApp({
-  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.REACT_APP_FIREBASE_STROAGE_BUCKET,
-  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.REACT_APP_FIREBASE_APP_ID,
-  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
+  apiKey: "AIzaSyCmsRZDm-UiRXrbVawXeALrH6a7mvxb0zI",
+  authDomain: "antidepressotodo.firebaseapp.com",
+  databaseURL:
+    "https://antidepressotodo-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "antidepressotodo",
+  storageBucket: "antidepressotodo.appspot.com",
+  messagingSenderId: "986590210949",
+  appId: "1:986590210949:web:0374cea87902e025c4f2ec",
+  measurementId: "G-Z1X2ML58YL",
 });
 
-export const auth = app.auth();
-export default app;
+const db = app.firestore();
+// const auth = app.auth();
+
+export default db;

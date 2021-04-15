@@ -6,6 +6,7 @@ import ToDoListBigCard from "../../components/ToDoList/ToDoListBigCard/ToDoListB
 import BottomBar from "../../components/UI/BottomBar/BottomBar";
 import AddModal from "../../components/UI/AddModal/AddModal";
 import Backdrop from "../../components/UI/Backdrop/Backdrop";
+import db from "../../firebase";
 
 import styles from "./Layout.module.css";
 import Settings from "../../components/Settings/Settings";
@@ -56,15 +57,23 @@ const Layout = () => {
   const [showAddModal, setAddModal] = useState(false);
   const [settings, setSettings] = useState({ show: false, image: "" });
 
+  // React.useEffect(() => {
+  //   const data = localStorage.getItem("My-ToDos");
+  //   if (data) setTodos(JSON.parse(data));
+  // }, []);
+
+  // React.useEffect(() => {
+  //   localStorage.setItem("My-ToDos", JSON.stringify(todos));
+  // });
+
   React.useEffect(() => {
-    const data = localStorage.getItem("My-ToDos");
-    if (data) setTodos(JSON.parse(data));
+    db.collection("todos").onSnapshot((snapshot) => {
+      console.log(snapshot.docs.map((doc) => doc.data()));
+      setTodos(snapshot.docs.map((doc) => doc.data()));
+    });
   }, []);
 
-  React.useEffect(() => {
-    localStorage.setItem("My-ToDos", JSON.stringify(todos));
-  });
-
+  //shows Backdrop on reload when smth is open
   React.useEffect(() => {
     for (let i = 0; i < todos.length; i++) {
       if (todos[i].showToDo || todos[i].showDeleteModal) {
@@ -247,7 +256,7 @@ const Layout = () => {
     setSettings(settingsNew);
   };
 
-  console.log(settings);
+  // console.log(settings);
 
   let lastToDoItem = todos[todos.length - 1];
 
