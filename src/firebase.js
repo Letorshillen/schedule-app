@@ -2,7 +2,7 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
 
-const app = firebase.initializeApp({
+const firebaseApp = firebase.initializeApp({
   apiKey: "AIzaSyCmsRZDm-UiRXrbVawXeALrH6a7mvxb0zI",
   authDomain: "antidepressotodo.firebaseapp.com",
   databaseURL:
@@ -14,7 +14,8 @@ const app = firebase.initializeApp({
   measurementId: "G-Z1X2ML58YL",
 });
 
-const db = app.firestore();
-// const auth = app.auth();
+const db = firebaseApp.firestore();
+const auth = firebase.auth();
+const provider = new firebase.auth.GoogleAuthProvider();
 
-export default db;
+export { db, auth, provider };

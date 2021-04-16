@@ -33,3 +33,33 @@
   color: #26a249;
   font-size: 30px;
 }
+
+.LogoutModal {
+  position: fixed;
+  width: 80%;
+  background-color: white;
+  z-index: 100;
+  text-align: center;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 22px;
+}
+
+.LogoutModalInner {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 10px;
+}
+
+.Backdrop {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}

@@ -6,11 +6,12 @@ import ToDoListBigCard from "../../components/ToDoList/ToDoListBigCard/ToDoListB
 import BottomBar from "../../components/UI/BottomBar/BottomBar";
 import AddModal from "../../components/UI/AddModal/AddModal";
 import Backdrop from "../../components/UI/Backdrop/Backdrop";
-import db from "../../firebase";
+import { auth, db, provider } from "../../firebase";
 
 import styles from "./Layout.module.css";
 import Settings from "../../components/Settings/Settings";
 import BgImg from "../../components/UI/BgImg/BgImg";
+import LogIn from "../../components/UI/LogIn/LogIn";
 
 const Layout = () => {
   const [todos, setTodos] = useState([
@@ -56,6 +57,8 @@ const Layout = () => {
   const [showBackdrop, setBackdrop] = useState(false);
   const [showAddModal, setAddModal] = useState(false);
   const [settings, setSettings] = useState({ show: false, image: "" });
+  const [user, setUser] = useState();
+  const [pending, setPending] = useState(true);
 
   // React.useEffect(() => {
   //   const data = localStorage.getItem("My-ToDos");
@@ -256,6 +259,27 @@ const Layout = () => {
     setSettings(settingsNew);
   };
 
+  const LoginHandler = () => {
+    if (!user) {
+      auth.signInWithRedirect(provider).then((result) => {
+        setUser(result.user);
+      });
+    }
+  };
+
+  const LogoutHandler = () => {
+    auth.signOut().then(() => {
+      setUser(null);
+    });
+  };
+
+  React.useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      setUser(user);
+      setPending(false);
+    });
+  }, []);
+
   // console.log(settings);
 
   let lastToDoItem = todos[todos.length - 1];
@@ -289,29 +313,36 @@ const Layout = () => {
 
   return (
     <React.Fragment>
-      <Settings show={settings.show} changeBackground={changeBackground} />
-      <div className={styles.ListWrapper}>{todolist}</div>
-      {todosBig}
-      <Backdrop showBackdrop={showBackdrop} />
-      <ToDoListBigCard
-        date1={lastToDoItem.date1}
-        date2={lastToDoItem.date2}
-        tasks={lastToDoItem.tasks}
-        moodGood={goodMoodhandler}
-        moodNeutral={neutralMoodhandler}
-        moodBad={badMoodhandler}
-      />
-      <AddModal
-        onAdd={addNewItemToList}
-        closeAddModal={closeAddModalHandler}
-        showAddModal={showAddModal}
-      />
-      <BottomBar
-        openSettings={openSettingsHandler}
-        openAddModal={openAddModalHandler}
-      />
-      <BgImg image={settings.image} />
-      <div className="bg-color"></div>
+      {user ? (
+        <React.Fragment>
+          <Settings show={settings.show} changeBackground={changeBackground} />
+          <div className={styles.ListWrapper}>{todolist}</div>
+          {todosBig}
+          <Backdrop showBackdrop={showBackdrop} />
+          <ToDoListBigCard
+            date1={lastToDoItem.date1}
+            date2={lastToDoItem.date2}
+            tasks={lastToDoItem.tasks}
+            moodGood={goodMoodhandler}
+            moodNeutral={neutralMoodhandler}
+            moodBad={badMoodhandler}
+          />
+          <AddModal
+            onAdd={addNewItemToList}
+            closeAddModal={closeAddModalHandler}
+            showAddModal={showAddModal}
+          />
+          <BottomBar
+            openSettings={openSettingsHandler}
+            openAddModal={openAddModalHandler}
+            logout={LogoutHandler}
+          />
+          <BgImg image={settings.image} />
+          <div className="bg-color"></div>{" "}
+        </React.Fragment>
+      ) : (
+        <LogIn login={LoginHandler} pending={pending} />
+      )}
     </React.Fragment>
   );
 };
