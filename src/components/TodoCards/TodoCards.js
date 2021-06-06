@@ -12,11 +12,9 @@ export default class TodoCards extends Component {
           tasks={todo.tasks}
           show={todo.showToDo}
           close={() => this.props.close(index)}
-          moodGood={this.props.moodGood}
-          moodNeutral={this.props.moodNeutral}
-          moodBad={this.props.moodBad}
-          createBackup={this.props.createBackup}
-          editBackup={this.props.editBackup}
+          moodGood={(taskIndex) => this.props.moodGood(index, taskIndex)}
+          moodNeutral={(taskIndex) => this.props.moodNeutral(index, taskIndex)}
+          moodBad={(taskIndex) => this.props.moodBad(index, taskIndex)}
           addTaskLine={() => this.props.addTaskLine(index)}
           removeTaskLine={() => this.props.removeTaskLine(index)}
           editSubmit={(editedTodo) => this.props.editSubmit(index, editedTodo)}

@@ -2,13 +2,25 @@ import React from "react";
 import styles from "./ToDoListBigCard.module.css";
 import Dropdown from "react-bootstrap/Dropdown";
 import {
-  RiEmotionHappyLine,
   RiEmotionUnhappyLine,
   RiEmotionLine,
   RiEmotionNormalLine,
 } from "react-icons/ri";
 
 const ToDoListBigCard = (props) => {
+  const getTaskIndexNeutral = (index) => {
+    const taskIndex = index;
+    props.moodNeutral(taskIndex);
+  };
+
+  const getTaskIndexGood = (index) => {
+    const taskIndex = index;
+    props.moodGood(taskIndex);
+  };
+  const getTaskIndexBad = (index) => {
+    const taskIndex = index;
+    props.moodBad(taskIndex);
+  };
   return (
     <div className={styles.ToDoListBigCard}>
       <h1>
@@ -41,26 +53,34 @@ const ToDoListBigCard = (props) => {
                 variant="success"
                 id="dropdown-basic"
               >
-                <RiEmotionHappyLine />
+                {task.mood === 1 ? (
+                  <RiEmotionLine />
+                ) : task.mood === 2 ? (
+                  <RiEmotionNormalLine />
+                ) : task.mood === 3 ? (
+                  <RiEmotionUnhappyLine />
+                ) : (
+                  <RiEmotionNormalLine />
+                )}
               </Dropdown.Toggle>
 
               <Dropdown.Menu className={styles.DropdownMenu}>
                 <Dropdown.Item className={styles.DropdownItem}>
                   <RiEmotionLine
                     style={{ color: "#26a249" }}
-                    onClick={() => props.moodGood(index)}
+                    onClick={() => getTaskIndexGood(index)}
                   />
                 </Dropdown.Item>
                 <Dropdown.Item className={styles.DropdownItem}>
                   <RiEmotionNormalLine
                     style={{ color: "#ff9103" }}
-                    onClick={() => props.moodNeutral(index)}
+                    onClick={() => getTaskIndexNeutral(index)}
                   />
                 </Dropdown.Item>
                 <Dropdown.Item className={styles.DropdownItem}>
                   <RiEmotionUnhappyLine
                     style={{ color: "#f0291a" }}
-                    onClick={() => props.moodBad(index)}
+                    onClick={() => getTaskIndexBad(index)}
                   />
                 </Dropdown.Item>
               </Dropdown.Menu>

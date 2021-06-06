@@ -59,10 +59,13 @@ const Layout = () => {
   React.useEffect(() => {
     const data = localStorage.getItem("My-ToDos");
     if (data) setTodos(JSON.parse(data));
+    const settings = localStorage.getItem("Settings");
+    if (settings) setSettings(JSON.parse(settings));
   }, []);
 
   React.useEffect(() => {
     localStorage.setItem("My-ToDos", JSON.stringify(todos));
+    localStorage.setItem("Settings", JSON.stringify(settings));
   });
 
   React.useEffect(() => {
@@ -138,39 +141,12 @@ const Layout = () => {
   };
 
   const openAddModalHandler = () => {
-    setBackdrop(true);
-    setAddModal(true);
-  };
-
-  const closeAddModalHandler = () => {
-    setBackdrop(false);
-    setAddModal(false);
+    setAddModal(!showAddModal);
   };
 
   const addNewItemToList = (newTodo) => {
-    // for (let i = 1; i < todos.length; i++) {
-    //   if (
-    //     newTodo.date1 === todos[i].date1 &&
-    //     newTodo.date2 === todos[i].date2
-    //   ) {
-    //     alert("Schon ToDo für dieses Datum angelegt");
-    //     return;
-    //   }
-    // }
     setTodos([...todos, newTodo]);
-    closeAddModalHandler();
-  };
-
-  const todoSave = [];
-
-  const createBackup = () => {
-    todoSave.push(todos);
-    console.log(todoSave);
-  };
-
-  const editBackup = () => {
-    console.log(todoSave);
-    setTodos(todoSave);
+    openAddModalHandler();
   };
 
   const addTaskLine = (index) => {
@@ -199,37 +175,26 @@ const Layout = () => {
   };
 
   const editItemHandler = (index, editedTodo) => {
-    // for (let i = 1; i < todos.length; i++) {
-    //   if (
-    //     editedTodo.date1 === todos[i].date1 &&
-    //     editedTodo.date1 !== todos[index].date1 &&
-    //     editedTodo.date2 === todos[i].date2 &&
-    //     editedTodo.date2 !== todos[index].date2
-    //   ) {
-    //     alert("Schon ToDo für dieses Datum angelegt");
-    //     return;
-    //   }
-    // }
     const todoNew = [...todos];
     todoNew[index] = editedTodo;
     setTodos(todoNew);
   };
 
-  const goodMoodhandler = (index) => {
+  const goodMoodhandler = (index, taskIndex) => {
     const todoNew = [...todos];
-    todoNew[todoNew.length - 1].tasks[index].mood = 1;
+    todoNew[index].tasks[taskIndex].mood = 1;
     setTodos(todoNew);
   };
 
-  const neutralMoodhandler = (index) => {
+  const neutralMoodhandler = (index, taskIndex) => {
     const todoNew = [...todos];
-    todoNew[todoNew.length - 1].tasks[index].mood = 2;
+    todoNew[index].tasks[taskIndex].mood = 2;
     setTodos(todoNew);
   };
 
-  const badMoodhandler = (index) => {
+  const badMoodhandler = (index, taskIndex) => {
     const todoNew = [...todos];
-    todoNew[todoNew.length - 1].tasks[index].mood = 3;
+    todoNew[index].tasks[taskIndex].mood = 3;
     setTodos(todoNew);
   };
 
@@ -242,12 +207,18 @@ const Layout = () => {
 
   const changeBackground = (event) => {
     const settingsNew = { ...settings };
+    const reader = new FileReader();
 
-    settingsNew.image = URL.createObjectURL(event.target.files[0]);
-    setSettings(settingsNew);
+    reader.addEventListener("load", () => {
+      localStorage.setItem("image", reader.result);
+      const img = localStorage.getItem("image");
+      settingsNew.image = img;
+      settingsNew.show = false;
+      setSettings(settingsNew);
+    });
+
+    reader.readAsDataURL(event.target.files[0]);
   };
-
-  console.log(settings);
 
   let lastToDoItem = todos[todos.length - 1];
 
@@ -260,8 +231,6 @@ const Layout = () => {
       moodGood={goodMoodhandler}
       moodNeutral={neutralMoodhandler}
       moodBad={badMoodhandler}
-      createBackup={createBackup}
-      editBackup={editBackup}
       addTaskLine={addTaskLine}
       removeTaskLine={removeTaskLine}
     />
@@ -280,7 +249,11 @@ const Layout = () => {
 
   return (
     <React.Fragment>
-      <Settings show={settings.show} changeBackground={changeBackground} />
+      <Settings
+        show={settings.show}
+        changeBackground={changeBackground}
+        closeSettings={openSettingsHandler}
+      />
       <div className={styles.ListWrapper}>{todolist}</div>
       {todosBig}
       <Backdrop showBackdrop={showBackdrop} />
@@ -288,13 +261,15 @@ const Layout = () => {
         date1={lastToDoItem.date1}
         date2={lastToDoItem.date2}
         tasks={lastToDoItem.tasks}
-        moodGood={goodMoodhandler}
-        moodNeutral={neutralMoodhandler}
-        moodBad={badMoodhandler}
+        moodGood={(taskIndex) => goodMoodhandler(todos.length - 1, taskIndex)}
+        moodNeutral={(taskIndex) =>
+          neutralMoodhandler(todos.length - 1, taskIndex)
+        }
+        moodBad={(taskIndex) => badMoodhandler(todos.length - 1, taskIndex)}
       />
       <AddModal
         onAdd={addNewItemToList}
-        closeAddModal={closeAddModalHandler}
+        closeAddModal={openAddModalHandler}
         showAddModal={showAddModal}
       />
       <BottomBar

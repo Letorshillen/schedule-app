@@ -1,14 +1,13 @@
 .AddModal {
   position: fixed;
-  width: 90%;
-  height: 90vh;
+  width: 100%;
+  height: 100vh;
   transform: translate(-50%, -50%);
   left: 50%;
   top: 50%;
   background-color: white;
   z-index: 100;
-  border-radius: 20px;
-  padding: 15px;
+  padding: 30px;
   font-family: inherit;
   overflow-y: scroll;
 }
@@ -17,7 +16,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 10px;
+  padding: 20px 0;
 }
 
 .Wrapper label {
@@ -112,8 +111,7 @@ button[type="submit"] {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 10px;
-  padding: 0 10px;
+  margin-bottom: 20px;
 }
 
 input::-webkit-scrollbar,

@@ -77,7 +77,7 @@ const AddModal = (props) => {
   return props.showAddModal ? (
     <form autoComplete="off" onSubmit={onSubmit} className={styles.AddModal}>
       <div className={styles.Header}>
-        <h1>Neues ToDo</h1>
+        <h2>Neues ToDo</h2>
         <IoMdClose onClick={props.closeAddModal} className={styles.Close} />
       </div>
 
